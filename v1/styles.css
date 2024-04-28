@@ -3,4 +3,5 @@
 }
 .project-img {
   border-radius: 1.2rem;
+  object-fit: cover;
 }
