@@ -1,0 +1,32 @@
+{% extends 'admin/adminbase.html' %}
+
+{% block title %}Manage Categories{% endblock %}
+
+{% block content %}
+<h2>Manage Categories</h2>
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for category in categories %}
+        <tr>
+            <td>{{ category.id }}</td>
+            <td>{{ category.name }}</td>
+            <td>
+                <a href="{{ url_for('admin.edit_category', category_id=category.id) }}">Edit</a>
+                <form action="{{ url_for('admin.delete_category', category_id=category.id) }}" method="POST"
+                    style="display:inline;">
+                    <button type="submit">Delete</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<a href="{{ url_for('admin.add_category') }}">Add New Category</a>
+{% endblock %}
