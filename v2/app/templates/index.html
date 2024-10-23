@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://arifbucket.s3.amazonaws.com/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://arifbucket.s3.amazonaws.com/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://arifbucket.s3.amazonaws.com/favicon-16x16.png">
+    <link rel="manifest" href="https://arifbucket.s3.amazonaws.com/site.webmanifest">
+    <title>Joel Muhoho</title>
+    <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='styles.css') }}">
+
+</head>
+
+<body>
+    <div class="text-gray-900 font-sans antialiased overflow-hidden md:flex md:h-screen">
+        <!-- sidebar big screen and navbar small screen -->
+        <!-- sidebar star -->
+        <div class="sticky bg-gray-900 md:flex md:flex-shrink-0">
+            <div class="flex md:flex-col justify-between md:w-72">
+                <div class="px-6 py-6">
+                    <div class="justify-center w-full md:flex">
+                        <div class="flex items-center md:block md:text-center"><a href="/"><img
+                                    src="https://arifbucket.s3.amazonaws.com/Joel_muhoho_About_section_croped.webp"
+                                    class="profile w-24 h-24 rounded-full hover:opacity-75 sm:w-32 sm:h-32 md:w-48 md:h-48"
+                                    alt="Joel Muhoho"></a>
+                            <div class="ml-4 md:ml-0 md:mt-4">
+                                <div
+                                    class="text-gray-300 font-serif text-2xl font-semibold leading-tight sm:text-3xl md:text-2xl">
+                                    Joel Muhoho</div>
+                                <div class="text-gray-500 sm:text-xl md:text-base">Software Engineer</div>
+                                <div class="mt-4">
+                                    <a aria-label="My Twitter" href="https://twitter.com/Joel_muhoho" target="_blank"
+                                        class="mx-2 hover:text-blue-400 text-gray-100 border-0" rel="noreferrer">
+                                        <svg role="img" class="inline w-5 h-5 fill-current" viewBox="0 0 512 512">
+                                            <path
+                                                d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z">
+                                            </path>
+                                        </svg>
+                                    </a>
+                                    <a aria-label="My Github" href="https://github.com/joekariuki3" target="_blank"
+                                        class="mx-2 text-gray-100 hover:text-gray-500 border-0" rel="noreferrer">
+                                        <svg role="img" class="inline w-5 h-5 fill-current" viewBox="0 0 496 512">
+                                            <path
+                                                d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z">
+                                            </path>
+                                        </svg>
+                                    </a>
+                                    <a aria-label="My Linkedin" href="https://www.linkedin.com/in/joel-muhoho-568a407a/"
+                                        target="_blank" class="mx-2 text-gray-100 hover:text-blue-400 border-0"
+                                        rel="noreferrer">
+                                        <svg role="img" class="inline w-5 h-5 fill-current"
+                                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                            <path fill="currentColor"
+                                                d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z">
+                                            </path>
+                                        </svg>
+                                    </a>
+                                    <a aria-label="My Email" href="mailto:joelkmuhoho@gmail.com" target="_blank"
+                                        class="mx-2 text-gray-100 hover:text-green-400 border-0" rel="noreferrer">
+                                        <svg role="img" class="inline w-5 h-5 fill-current"
+                                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                                            <path
+                                                d="M1.5 8.67v8.58a3 3 0 0 0 3 3h15a3 3 0 0 0 3-3V8.67l-8.928 5.493a3 3 0 0 1-3.144 0L1.5 8.67Z" />
+                                            <path
+                                                d="M22.5 6.908V6.75a3 3 0 0 0-3-3h-15a3 3 0 0 0-3 3v.158l9.714 5.978a1.5 1.5 0 0 0 1.572 0L22.5 6.908Z" />
+                                        </svg>
+
+
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex md:items-center justify-center items-end">
+                    <a class="block px-4 py-3 text-gray-100 hover:bg-gray-700 rounded" target="_blank" href="/resume"
+                        rel="noreferrer">
+                        Resume
+                    </a>
+                </div>
+            </div>
+        </div>
+        <!-- sidebar end -->
+
+        <!-- main content start -->
+        <main class="mb-12 w-full md:overflow-y-auto">
+            <div class="container mx-auto px-5 max-w-3xl">
+                <!-- blog post start -->
+                <h2 class="mb-4 mt-12 font-serif text-3xl font-bold">Blog Posts</h2>
+                <section class="inline-block p-4 hover:bg-gray-200 rounded">
+
+                    <div class="mb-1">
+                        <div class="flex-grow text-gray-800 font-serif text-lg font-semibold">Lineage. A Journey
+                            into Family Roots and Connections</div>
+                        <div class="my-2 text-sm italic font-light md:my-0"><time
+                                datetime="2023-12-11T11:00:00.000Z">Dec 11, 2023</time></div>
+                    </div>
+                    <div>Lineage is a project born out of the desire to create a centralized platform for
+                        connecting with family members, exploring family trees, and preserving cherished.....
+                        <a class="text-blue-600 text-lg" target=”_blank”
+                            href="https://medium.com/@joel_Muhoho/lineage-a-journey-into-family-roots-and-connections-3bc375684455">Read
+                            More</a>
+                    </div>
+                </section>
+                <section class="inline-block p-4 hover:bg-gray-200 rounded">
+
+                    <div class="mb-1">
+                        <div class="flex-grow text-gray-800 font-serif text-lg font-semibold">WordPress site
+                            incident report</div>
+                        <div class="my-2 text-sm italic font-light md:my-0"><time
+                                datetime="2023-11-10T13:00:00.000Z">Nov 10, 2023</time></div>
+                    </div>
+                    <div>Our WordPress site experienced a critical issue following a configuration update in the
+                        wp-settings file, resulting in a widespread 500 error for most user requests. The
+                        incident occurred on November 4, 2023, from.....
+                        <a class="text-blue-600 text-lg" target=”_blank”
+                            href="https://medium.com/@joel_Muhoho/wordpress-site-incident-report-0e6cc5fe3102">Read More
+                        </a>
+                    </div>
+                </section>
+                <section class="inline-block p-4 hover:bg-gray-200 rounded">
+                    <div class="mb-1">
+                        <div class="flex-grow text-gray-800 font-serif text-lg font-semibold">What happens when
+                            you type google.com in your browser and press Enter</div>
+                        <div class="my-2 text-sm italic font-light md:my-0"><time
+                                datetime="2023-10-12T014:00:00.000Z">OCT 12, 2023</time></div>
+                    </div>
+                    <div>https://google.com is a Uniform Resource Locator (URL). it can be divided into two
+                        parts.
+
+                        https -> hypertext transfer protocol secure. it is an application layer protocol (rules)
+                        used to communicate.....
+                        <a class="text-blue-600 text-lg" target=”_blank”
+                            href="https://medium.com/@joel_Muhoho/what-happens-when-you-type-google-com-in-your-browser-and-press-enter-4132319792a9">Read
+                            More
+                        </a>
+                    </div>
+                </section>
+                <!-- blog post end -->
+
+                <!-- projects start-->
+                <h2 class="mb-4 mt-12 font-serif text-3xl font-bold">Projects</h2>
+
+                <div class="mb-4 border-b border-gray-200 dark:border-gray-700">
+                    <ul class="flex flex-wrap -mb-px text-sm font-medium text-center" id="default-tab"
+                        data-tabs-toggle="#default-tab-content" role="tablist">
+                        <li class="me-2" role="presentation">
+                            <button class="inline-block p-4 border-b-2 rounded-t-lg" id="full-stack-tab"
+                                data-tabs-target="#full-stack" type="button" role="tab" aria-controls="full-stack"
+                                aria-selected="false">Full Stack ({{full_stack_category.projects | length}})</button>
+                        </li>
+                        <li class="me-2" role="presentation">
+                            <button
+                                class="inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
+                                id="front-end-tab" data-tabs-target="#front-end" type="button" role="tab"
+                                aria-controls="front-end" aria-selected="false">Front End ({{front_end_category.projects
+                                | length}})</button>
+                        </li>
+                        <li class="me-2" role="presentation">
+                            <button
+                                class="inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
+                                id="email-development-tab" data-tabs-target="#email-development" type="button"
+                                role="tab" aria-controls="email-development" aria-selected="false">Email
+                                development ({{email_category.projects
+                                | length}})</button>
+                        </li>
+                    </ul>
+                </div>
+
+                <div id="default-tab-content">
+                    <div class="hidden p-4 rounded-lg" id="full-stack" role="tabpanel" aria-labelledby="full-stack-tab">
+                        <!-- full stack projects start -->
+                        {% if full_stack_category%}
+                        {% for project in full_stack_category.projects%}
+                        <div
+                            class="md:flex items-center hover:border-gray block px-4 py-6 hover:text-black hover:bg-gray-200 border-b border-t border-transparent rounded">
+                            <div class="flex-shrink-0 mb-4 sm:mb-0 sm:mr-4">
+                                <img class="project-img w-36 h-36 md:w-48 md:h-48" src="{{project.image_url}}"
+                                    alt="{{project.title}}">
+                            </div>
+                            <div>
+                                <div class="mt-4 text-gray-800 font-serif text-lg font-semibold md:mt-0">
+                                    <span>{{project.title}}</span>
+                                </div>
+                                <p class="mt-1">
+                                    {{project.description}}
+                                </p>
+                                <div>
+                                    <span class="text-sm font-semibold italic mr-1">Technology used:</span>
+                                    <span class="text-sm italic font-light">{{project.title}}</span>
+                                </div>
+                                <div class="mt-1">
+                                    <a href="{{project.demo_url}}" target="_blank"
+                                        class="inline-flex items-center justify-center p-2 text-base font-medium text-gray-500 rounded-lg bg-gray-50 hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700 dark:hover:text-white">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                            role="img" class="inline w-5 h-5 fill-current mr-1">
+                                            <path
+                                                d="M15.75 8.25a.75.75 0 0 1 .75.75c0 1.12-.492 2.126-1.27 2.812a.75.75 0 1 1-.992-1.124A2.243 2.243 0 0 0 15 9a.75.75 0 0 1 .75-.75Z" />
+                                            <path fill-rule="evenodd"
+                                                d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25ZM4.575 15.6a8.25 8.25 0 0 0 9.348 4.425 1.966 1.966 0 0 0-1.84-1.275.983.983 0 0 1-.97-.822l-.073-.437c-.094-.565.25-1.11.8-1.267l.99-.282c.427-.123.783-.418.982-.816l.036-.073a1.453 1.453 0 0 1 2.328-.377L16.5 15h.628a2.25 2.25 0 0 1 1.983 1.186 8.25 8.25 0 0 0-6.345-12.4c.044.262.18.503.389.676l1.068.89c.442.369.535 1.01.216 1.49l-.51.766a2.25 2.25 0 0 1-1.161.886l-.143.048a1.107 1.107 0 0 0-.57 1.664c.369.555.169 1.307-.427 1.605L9 13.125l.423 1.059a.956.956 0 0 1-1.652.928l-.679-.906a1.125 1.125 0 0 0-1.906.172L4.575 15.6Z"
+                                                clip-rule="evenodd" />
+                                        </svg>
+                                        <span class="w-full">Live</span>
+                                    </a>
+                                    <a href="{{project.github_url}}" target="_blank"
+                                        class="inline-flex items-center justify-center p-2 text-base font-medium text-gray-500 rounded-lg bg-gray-50 hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700 dark:hover:text-white">
+                                        <svg role="img" class="inline w-5 h-5 fill-current mr-1" viewBox="0 0 496 512">
+                                            <path
+                                                d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z">
+                                            </path>
+                                        </svg>
+                                        <span class="w-full">Code</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                        {% else %}
+                        <p>Currently no Full Stack Projects found</p>
+                        {% endif %}
+                        <!-- full stack projects end -->
+                    </div>
+                    <div class="hidden p-4 rounded-lg" id="front-end" role="tabpanel" aria-labelledby="front-end-tab">
+                        <!-- front end projects start -->
+                        {% if front_end_category%}
+                        {% for project in front_end_category.projects%}
+                        <div
+                            class="md:flex items-center hover:border-gray block px-4 py-6 hover:text-black hover:bg-gray-200 border-b border-t border-transparent rounded">
+                            <div class="flex-shrink-0 mb-4 sm:mb-0 sm:mr-4">
+                                <img class="project-img w-36 h-36 md:w-48 md:h-48" src="{{project.image_url}}"
+                                    alt="{{project.title}}">
+                            </div>
+                            <div>
+                                <div class="mt-4 text-gray-800 font-serif text-lg font-semibold md:mt-0">
+                                    <span>{{project.title}}</span>
+                                </div>
+                                <p class="mt-1">
+                                    {{project.description}}
+                                </p>
+                                <div>
+                                    <span class="text-sm font-semibold italic mr-1">Technology used:</span>
+                                    <span class="text-sm italic font-light">{{project.title}}</span>
+                                </div>
+                                <div class="mt-1">
+                                    <a href="{{project.demo_url}}" target="_blank"
+                                        class="inline-flex items-center justify-center p-2 text-base font-medium text-gray-500 rounded-lg bg-gray-50 hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700 dark:hover:text-white">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                            role="img" class="inline w-5 h-5 fill-current mr-1">
+                                            <path
+                                                d="M15.75 8.25a.75.75 0 0 1 .75.75c0 1.12-.492 2.126-1.27 2.812a.75.75 0 1 1-.992-1.124A2.243 2.243 0 0 0 15 9a.75.75 0 0 1 .75-.75Z" />
+                                            <path fill-rule="evenodd"
+                                                d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25ZM4.575 15.6a8.25 8.25 0 0 0 9.348 4.425 1.966 1.966 0 0 0-1.84-1.275.983.983 0 0 1-.97-.822l-.073-.437c-.094-.565.25-1.11.8-1.267l.99-.282c.427-.123.783-.418.982-.816l.036-.073a1.453 1.453 0 0 1 2.328-.377L16.5 15h.628a2.25 2.25 0 0 1 1.983 1.186 8.25 8.25 0 0 0-6.345-12.4c.044.262.18.503.389.676l1.068.89c.442.369.535 1.01.216 1.49l-.51.766a2.25 2.25 0 0 1-1.161.886l-.143.048a1.107 1.107 0 0 0-.57 1.664c.369.555.169 1.307-.427 1.605L9 13.125l.423 1.059a.956.956 0 0 1-1.652.928l-.679-.906a1.125 1.125 0 0 0-1.906.172L4.575 15.6Z"
+                                                clip-rule="evenodd" />
+                                        </svg>
+                                        <span class="w-full">Live</span>
+                                    </a>
+                                    <a href="{{project.github_url}}" target="_blank"
+                                        class="inline-flex items-center justify-center p-2 text-base font-medium text-gray-500 rounded-lg bg-gray-50 hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700 dark:hover:text-white">
+                                        <svg role="img" class="inline w-5 h-5 fill-current mr-1" viewBox="0 0 496 512">
+                                            <path
+                                                d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z">
+                                            </path>
+                                        </svg>
+                                        <span class="w-full">Code</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                        {% else %}
+                        <p>Currently no Front End Projects found</p>
+                        {% endif %}
+                        <!-- front end projects end -->
+
+                    </div>
+                    <div class="hidden p-4 rounded-lg" id="email-development" role="tabpanel"
+                        aria-labelledby="email-development-tab">
+                        <!-- email projects start -->
+                        {% if email_category%}
+                        {% for project in email_category.projects%}
+                        <div
+                            class="md:flex items-center hover:border-gray block px-4 py-6 hover:text-black hover:bg-gray-200 border-b border-t border-transparent rounded">
+                            <div class="flex-shrink-0 mb-4 sm:mb-0 sm:mr-4">
+                                <img class="project-img w-36 h-36 md:w-48 md:h-48" src="{{project.image_url}}"
+                                    alt="{{project.title}}">
+                            </div>
+                            <div>
+                                <div class="mt-4 text-gray-800 font-serif text-lg font-semibold md:mt-0">
+                                    <span>{{project.title}}</span>
+                                </div>
+                                <p class="mt-1">
+                                    {{project.description}}
+                                </p>
+                                <div>
+                                    <span class="text-sm font-semibold italic mr-1">Technology used:</span>
+                                    <span class="text-sm italic font-light">{{project.title}}</span>
+                                </div>
+                                <div class="mt-1">
+                                    <a href="{{project.demo_url}}" target="_blank"
+                                        class="inline-flex items-center justify-center p-2 text-base font-medium text-gray-500 rounded-lg bg-gray-50 hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700 dark:hover:text-white">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                            role="img" class="inline w-5 h-5 fill-current mr-1">
+                                            <path
+                                                d="M15.75 8.25a.75.75 0 0 1 .75.75c0 1.12-.492 2.126-1.27 2.812a.75.75 0 1 1-.992-1.124A2.243 2.243 0 0 0 15 9a.75.75 0 0 1 .75-.75Z" />
+                                            <path fill-rule="evenodd"
+                                                d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25ZM4.575 15.6a8.25 8.25 0 0 0 9.348 4.425 1.966 1.966 0 0 0-1.84-1.275.983.983 0 0 1-.97-.822l-.073-.437c-.094-.565.25-1.11.8-1.267l.99-.282c.427-.123.783-.418.982-.816l.036-.073a1.453 1.453 0 0 1 2.328-.377L16.5 15h.628a2.25 2.25 0 0 1 1.983 1.186 8.25 8.25 0 0 0-6.345-12.4c.044.262.18.503.389.676l1.068.89c.442.369.535 1.01.216 1.49l-.51.766a2.25 2.25 0 0 1-1.161.886l-.143.048a1.107 1.107 0 0 0-.57 1.664c.369.555.169 1.307-.427 1.605L9 13.125l.423 1.059a.956.956 0 0 1-1.652.928l-.679-.906a1.125 1.125 0 0 0-1.906.172L4.575 15.6Z"
+                                                clip-rule="evenodd" />
+                                        </svg>
+                                        <span class="w-full">Live</span>
+                                    </a>
+                                    <a href="{{project.github_url}}" target="_blank"
+                                        class="inline-flex items-center justify-center p-2 text-base font-medium text-gray-500 rounded-lg bg-gray-50 hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700 dark:hover:text-white">
+                                        <svg role="img" class="inline w-5 h-5 fill-current mr-1" viewBox="0 0 496 512">
+                                            <path
+                                                d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z">
+                                            </path>
+                                        </svg>
+                                        <span class="w-full">Code</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                        {% else %}
+                        <p>Currently no Email Projects found</p>
+                        {% endif %}
+                        <!-- email projects end -->
+                    </div>
+                </div>
+
+
+
+                <!-- projects end-->
+            </div>
+        </main>
+        <!-- main content end -->
+    </div>
+    <script src="{{ url_for('static',filename='scripts.js') }}"> </script>
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
+</body>
+
+</html>
