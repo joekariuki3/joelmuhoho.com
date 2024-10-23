@@ -1,0 +1,29 @@
+{% extends 'admin/adminbase.html' %}
+
+{% block title %}Admin Dashboard{% endblock %}
+
+{% block content %}
+<h2>Admin Dashboard</h2>
+<h3>Categories</h3>
+<ul>
+    {% for category in categories %}
+    <li>
+        {{ category.name }} ({{ category_project_counts[category.id] }} projects)
+        <button onclick="toggleProjects({{ category.id }})">Show Projects</button>
+        <ul id="projects-list-{{ category.id }}" style="display: none;">
+            {% for project in category.projects %}
+            <li>{{ project.title }}</li>
+            {% endfor %}
+        </ul>
+    </li>
+    {% endfor %}
+    </li>
+</ul>
+
+<script>
+    function toggleProjects(categoryId) {
+        const projectList = document.getElementById(`projects-list-${categoryId}`);
+        projectList.style.display = projectList.style.display === 'none' ? 'block' : 'none';
+    }
+</script>
+{% endblock %}
