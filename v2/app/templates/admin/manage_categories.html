@@ -3,30 +3,36 @@
 {% block title %}Manage Categories{% endblock %}
 
 {% block content %}
-<h2>Manage Categories</h2>
-<table>
+<h2 class="text-2xl font-bold mb-4">Manage Categories</h2>
+<table class="min-w-full bg-white border border-gray-300">
     <thead>
-        <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Actions</th>
+        <tr class="bg-gray-200">
+            <th class="py-2 px-4 border-b">Name</th>
+            <th class="py-2 px-4 border-b">Projects Count</th>
+            <th class="py-2 px-4 border-b">Actions</th>
         </tr>
     </thead>
     <tbody>
         {% for category in categories %}
-        <tr>
-            <td>{{ category.id }}</td>
-            <td>{{ category.name }}</td>
-            <td>
-                <a href="{{ url_for('admin.edit_category', category_id=category.id) }}">Edit</a>
+        <tr class="text-center border-b">
+            <td class="py-2 px-4">{{ category.name }}</td>
+            <td class="py-2 px-4">{{ category.projects | length }}</td>
+            <td class="py-2 px-4">
+                <a href="{{ url_for('admin.edit_category', category_id=category.id) }}"
+                    class="text-blue-500 hover:underline">Edit</a>
                 <form action="{{ url_for('admin.delete_category', category_id=category.id) }}" method="POST"
                     style="display:inline;">
-                    <button type="submit">Delete</button>
+                    <button type="submit" class="ml-2 text-red-500 hover:text-red-700 focus:outline-none">
+                        Delete
+                    </button>
                 </form>
             </td>
         </tr>
         {% endfor %}
     </tbody>
 </table>
-<a href="{{ url_for('admin.add_category') }}">Add New Category</a>
+<a href="{{ url_for('admin.add_category') }}"
+    class="mt-4 inline-block bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+    Add New Category
+</a>
 {% endblock %}

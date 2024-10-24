@@ -5,37 +5,63 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Admin Dashboard{% endblock %}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 
-<body>
-    <header>
-        <h1>Admin Dashboard</h1>
-        <nav>
-            <ul>
-                <li><a href="{{ url_for('admin.admin_dashboard') }}">Dashboard</a></li>
-                <li><a href="{{ url_for('admin.manage_projects') }}">Manage Projects</a></li>
-                <li><a href="{{ url_for('admin.manage_categories') }}">Manage Categories</a></li>
-            </ul>
-        </nav>
+<body class="bg-gray-100 text-gray-800">
+    <header class="bg-blue-600 text-white py-4">
+        <div class="container mx-auto px-4 flex justify-between items-center">
+
+            <a href="{{ url_for('admin.admin_dashboard') }}">
+                <h1 class="text-2xl font-bold">Admin Dashboard</h1>
+            </a>
+            <nav>
+                <ul class="flex space-x-6">
+                    <li>
+                        <a href="{{ url_for('admin.admin_dashboard') }}" class="hover:text-gray-200">Dashboard</a>
+                    </li>
+                    <li>
+                        <a href="{{ url_for('admin.manage_projects') }}" class="hover:text-gray-200">Manage Projects</a>
+                    </li>
+                    <li>
+                        <a href="{{ url_for('admin.manage_categories') }}" class="hover:text-gray-200">Manage
+                            Categories</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
     </header>
 
-    <main>
+    <main class="container mx-auto px-4 py-8">
         <!-- flash messages -->
         {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
-        {% for category, message in messages %}
-        <div class="flash {{ category }}">
-            {{ message }}
+        <div class="mb-4">
+            {% for category, message in messages %}
+            <div
+                class="flash {{ category }} p-4 mb-2 border-l-4
+                {% if category == 'success' %} border-green-500 bg-green-100 text-green-800 {% elif category == 'error' %} border-red-500 bg-red-100 text-red-800 {% elif category == 'warning' %} border-yellow-500 bg-yellow-100 text-yellow-800 {% else %} border-gray-500 bg-gray-100 text-gray-800 {% endif %}">
+                {{ message }}
+            </div>
+            {% endfor %}
         </div>
-        {% endfor %}
         {% endif %}
         {% endwith %}
+
         {% block content %}{% endblock %}
     </main>
 
-    <footer>
-        <p>&copy; {{ current_year }} Your Website Name</p>
+    <footer class="bg-gray-800 text-gray-400 py-6">
+        <div class="container mx-auto text-center">
+
+            <p>
+                &copy;
+                <script>document.write(new Date().getFullYear())</script>
+                <a href="http://joelmuhoho.com">joelmuhoho.com</a>.
+                All rights reserved.
+            </p>
+        </div>
     </footer>
 </body>
 
