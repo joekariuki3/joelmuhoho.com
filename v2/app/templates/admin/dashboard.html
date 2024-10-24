@@ -8,7 +8,7 @@
 <ul>
     {% for category in categories %}
     <li>
-        {{ category.name }} ({{ category_project_counts[category.id] }} projects)
+        {{ category.name }} ({{ category.projects | length }} projects)
         <button onclick="toggleProjects({{ category.id }})">Show Projects</button>
         <ul id="projects-list-{{ category.id }}" style="display: none;">
             {% for project in category.projects %}

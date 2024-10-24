@@ -4,6 +4,9 @@
 
 {% block content %}
 <h2>Manage Projects</h2>
+{% if not categories %}
+<p>Currently no Categorys found</p>
+{% else %}
 <table>
     <thead>
         <tr>
@@ -14,11 +17,17 @@
         </tr>
     </thead>
     <tbody>
-        {% for project in projects %}
+        {% for category in categories %}
+        {% if not category.projects %}
+        <tr>
+            <td colspan="4">No projects found in this category</td>
+        </tr>
+        {% else %}
+        {% for project in category.projects %}
         <tr>
             <td>{{ project.title }}</td>
             <td>{{ project.description }}</td>
-            <td>{{ project.category.name }}</td>
+            <td>{{ category.name }}</td>
             <td>
                 <a href="{{ url_for('admin.edit_project', project_id=project.id) }}">Edit</a>
                 <form action="{{ url_for('admin.delete_project', project_id=project.id) }}" method="POST"
@@ -28,6 +37,9 @@
             </td>
         </tr>
         {% endfor %}
+        {% endif %}
+        {% endfor %}
+        {% endif %}
     </tbody>
 </table>
 <a href="{{ url_for('admin.add_project') }}">Add New Project</a>
