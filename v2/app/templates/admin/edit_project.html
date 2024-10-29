@@ -3,50 +3,58 @@
 {% block title %}Edit Project{% endblock %}
 
 {% block content %}
-<h2 class="text-2xl font-bold mb-6">Edit Project</h2>
-<form action="{{ url_for('admin.edit_project', project_id=project.id) }}" method="POST" class="space-y-6">
-    <div>
-        <label for="title" class="block text-sm font-medium text-gray-700">Title:</label>
-        <input type="text" name="title" value="{{ project.title }}" required
-            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+<section class="bg-white">
+    <div class="max-w-2xl px-4 py-8 mx-auto lg:py-16">
+        <h2 class="mb-4 text-xl font-bold text-gray-900">Edit Project</h2>
+        <form action="{{ url_for('admin.edit_project', project_id=project.id) }}" method="POST">
+            <div class="grid gap-4 mb-4 sm:grid-cols-2 sm:gap-6 sm:mb-5">
+                <div class="sm:col-span-2">
+                    <label for="title" class="block mb-2 text-sm font-medium text-gray-900">Title:</label>
+                    <input type="text" name="title" id="title" value="{{ project.title }}" required
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5">
+                </div>
+                <div class="sm:col-span-2">
+                    <label for="description" class="block mb-2 text-sm font-medium text-gray-900">Description:</label>
+                    <textarea name="description" id="description" rows="4" required
+                        class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-600 focus:border-blue-600">{{ project.description }}</textarea>
+                </div>
+                <div>
+                    <label for="category_id" class="block mb-2 text-sm font-medium text-gray-900">Category:</label>
+                    <select name="category_id" id="category_id" required
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5">
+                        {% for category in categories %}
+                        <option value="{{ category.id }}" {% if category.id==project.category_id %}selected{% endif %}>
+                            {{ category.name }}
+                        </option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div>
+                    <label for="image_url" class="block mb-2 text-sm font-medium text-gray-900">Image URL:</label>
+                    <input type="text" name="image_url" id="image_url" value="{{ project.image_url }}" required
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5">
+                </div>
+                <div>
+                    <label for="demo_url" class="block mb-2 text-sm font-medium text-gray-900">Demo URL:</label>
+                    <input type="text" name="demo_url" id="demo_url" value="{{ project.demo_url }}" required
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5">
+                </div>
+                <div>
+                    <label for="github_url" class="block mb-2 text-sm font-medium text-gray-900">GitHub URL:</label>
+                    <input type="text" name="github_url" id="github_url" value="{{ project.github_url }}" required
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5">
+                </div>
+            </div>
+            <div class="flex items-center space-x-4">
+                <button type="submit"
+                    class="text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+                    Save Changes
+                </button>
+                <a href="{{ url_for('admin.manage_projects') }}" class="text-red-600 hover:text-red-800 font-medium">
+                    Cancel
+                </a>
+            </div>
+        </form>
     </div>
-    <div>
-        <label for="description" class="block text-sm font-medium text-gray-700">Description:</label>
-        <textarea name="description" required
-            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">{{ project.description }}</textarea>
-    </div>
-    <div>
-        <label for="category_id" class="block text-sm font-medium text-gray-700">Category:</label>
-        <select name="category_id" required
-            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
-            {% for category in categories %}
-            <option value="{{ category.id }}" {% if category.id==project.category_id %}selected{% endif %}>
-                {{ category.name }}
-            </option>
-            {% endfor %}
-        </select>
-    </div>
-    <div>
-        <label for="image_url" class="block text-sm font-medium text-gray-700">Image URL:</label>
-        <input type="text" name="image_url" value="{{ project.image_url }}" required
-            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
-    </div>
-    <div>
-        <label for="demo_url" class="block text-sm font-medium text-gray-700">Demo URL:</label>
-        <input type="text" name="demo_url" value="{{ project.demo_url }}" required
-            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
-    </div>
-    <div>
-        <label for="github_url" class="block text-sm font-medium text-gray-700">GitHub URL:</label>
-        <input type="text" name="github_url" value="{{ project.github_url }}" required
-            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
-    </div>
-    <button type="submit"
-        class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
-        Save Changes
-    </button>
-</form>
-<a href="{{ url_for('admin.manage_projects') }}" class="inline-block mt-4 text-blue-600 hover:text-blue-700">
-    Back to Projects
-</a>
+</section>
 {% endblock %}
