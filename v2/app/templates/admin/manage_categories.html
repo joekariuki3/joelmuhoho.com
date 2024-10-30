@@ -3,7 +3,16 @@
 {% block title %}Manage Categories{% endblock %}
 
 {% block content %}
-<h2 class="text-2xl font-bold mb-6">Manage Categories</h2>
+<div class="flex flex-row justify-between content-center">
+    <h2 class="text-2xl font-bold mb-6">Manage Categories</h2>
+    <!-- Add New Category Button -->
+    <a href="{{ url_for('admin.add_category') }}">
+        <button class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+            Add New Category
+        </button>
+    </a>
+</div>
+
 
 <!-- Table Section -->
 <table class="min-w-full bg-white border border-gray-300 rounded-lg overflow-hidden">
@@ -47,11 +56,7 @@
     </tbody>
 </table>
 
-<!-- Add New Category Button -->
-<a href="{{ url_for('admin.add_category') }}"
-    class="mt-4 inline-block bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
-    Add New Category
-</a>
+
 
 <!-- Delete Confirmation Modal -->
 <div id="delete-modal" class="fixed inset-0 hidden bg-gray-800 bg-opacity-75 flex justify-center items-center z-50">

@@ -3,12 +3,36 @@
 {% block title %}Manage Projects{% endblock %}
 
 {% block content %}
-<h2 class="text-2xl font-bold mb-6">Manage Projects</h2>
+<div class="flex flex-row justify-between content-center">
+    <h2 class="text-2xl font-bold mb-6">Manage Projects</h2>
+    <!-- Add New Project Button -->
+    <a href="{{ url_for('admin.add_project') }}">
+        <button class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+            Add New Project
+        </button>
+    </a>
+</div>
 
 <!-- Search Bar -->
-<div class="mb-4">
-    <input type="text" placeholder="Search Projects..." class="px-4 py-2 border rounded w-full md:w-1/2">
-</div>
+
+<form class="max-w-md mx-auto mb-4">
+    <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only">Search</label>
+    <div class="relative">
+        <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+            <svg class="w-4 h-4 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                viewBox="0 0 20 20">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+            </svg>
+        </div>
+        <input type="search" id="default-search"
+            class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500"
+            placeholder="Search Accotrac, Lineage..." required />
+        <button type="submit"
+            class="text-white absolute end-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2">Search</button>
+    </div>
+</form>
+
 
 {% if not categories %}
 <p class="text-red-500">Currently, no categories found.</p>
@@ -19,7 +43,8 @@
     <details class="bg-white shadow-md rounded overflow-hidden">
         <summary class="bg-gray-200 py-3 px-4 cursor-pointer flex justify-between items-center">
             <span class="font-semibold text-gray-700">{{ category.name }}</span>
-            <span class="text-gray-500">Projects ({{ category.projects | length }})</span>
+            <span class="text-gray-500">{{ category.projects | length }} {% if category.projects | length == 1
+                %}Project{% else %}Projects{% endif%}</span>
         </summary>
 
         <!-- Projects inside the category -->
@@ -67,11 +92,6 @@
 </div>
 {% endif %}
 
-<!-- Add New Project Button -->
-<a href="{{ url_for('admin.add_project') }}"
-    class="mt-6 inline-block bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700">
-    Add New Project
-</a>
 
 <!-- Delete Confirmation Modal -->
 <div id="delete-modal" class="fixed inset-0 hidden bg-gray-800 bg-opacity-75 flex justify-center items-center z-50">
