@@ -4,7 +4,13 @@ function toggleMenu() {
   navMenu.classList.toggle("hidden");
 }
 
-// manage projects script
+// toggle projects in dashboard
+function toggleProjects(categoryId) {
+  const projectList = document.getElementById(`projects-list-${categoryId}`);
+  projectList.classList.toggle("hidden");
+}
+
+// Function to show the delete modal for a project or category
 function showDeleteModal(projectId) {
   const modal = document.getElementById("delete-modal");
   const form = document.getElementById("delete-form");
