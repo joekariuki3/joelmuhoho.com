@@ -14,10 +14,11 @@ def admin_dashboard() -> 'flask.Response':
     :return: A rendered template of the admin dashboard
     """
     categories: List[Category] = Category.get_all()
+    projects_count = len(Project.get_all())
     if not categories:
         categories = []
         flash('No categories found. Please add some categories first.', 'warning')
-    return render_template('admin/dashboard.html', categories=categories)
+    return render_template('admin/dashboard.html', categories=categories, projects_count=projects_count)
 
 @admin.route('/add_project', methods=['GET', 'POST'])
 def add_project() -> 'flask.Response':
