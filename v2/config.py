@@ -12,6 +12,8 @@ class Config:
 
 class DevelopmentConfig(Config):
     DEBUG = True
+    SERVER_HOST = '0.0.0.0'
 
 class ProductionConfig(Config):
     DEBUG = False
+    SERVER_HOST = '127.0.0.1'
