@@ -54,10 +54,23 @@
         <div class="mb-4">
             {% for category, message in messages %}
             <div
-                class="flash {{ category }} p-4 mb-2 border-l-4
-                {% if category == 'success' %} border-green-500 bg-green-100 text-green-800 {% elif category == 'error' %} border-red-500 bg-red-100 text-red-800 {% elif category == 'warning' %} border-yellow-500 bg-yellow-100 text-yellow-800 {% else %} border-gray-500 bg-gray-100 text-gray-800 {% endif %}">
+                class="flash {{ category }} relative p-4 mb-2 border-l-4
+                    {% if category == 'success' %} border-green-500 bg-green-100 text-green-800 {% elif category == 'error' %} border-red-500 bg-red-100 text-red-800 {% elif category == 'warning' %} border-yellow-500 bg-yellow-100 text-yellow-800 {% else %} border-gray-500 bg-gray-100 text-gray-800 {% endif %}">
+
                 {{ message }}
+
+                <!-- Close Button (SVG centered) -->
+                <button type="button"
+                    class="absolute inset-y-0 right-0 flex items-center justify-center px-2 py-2 text-lg font-bold text-gray-600 hover:text-gray-800"
+                    onclick="this.parentElement.style.display='none';">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
             </div>
+
             {% endfor %}
         </div>
         {% endif %}
@@ -65,6 +78,7 @@
 
         {% block content %}{% endblock %}
     </main>
+
 
     <!-- Footer -->
     <footer class="bg-gray-800 text-gray-400 py-2">
