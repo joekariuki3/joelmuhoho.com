@@ -25,9 +25,12 @@
         </h5>
         <p class="text-sm font-normal text-gray-500">All categories and count of projects under them</p>
         <ul class="my-4 space-y-3">
+            {% if not categories %}
+            <li class="text-gray-700">No categories found</li>
+            {% else %}
             {% for category in categories %}
             <li>
-                <a onclick="toggleProjects({{ category.id }})"
+                <a onclick="toggleProjects('{{ category.id }}')"
                     class="flex items-center p-3 text-base font-bold text-gray-900 rounded-lg bg-gray-50 hover:bg-gray-100 group hover:shadow">
                     <span class="flex-1 ms-3 whitespace-nowrap">{{category.name}}</span>
                     <span
@@ -36,12 +39,17 @@
                         {% if category.projects| length == 1 %}project{% else %}projects{% endif%}</span>
                 </a>
                 <ul id="projects-list-{{ category.id }}" class="mt-3 pl-6 hidden">
+                    {% if not category.projects %}
+                    <li class="text-gray-700">No projects found in this category</li>
+                    {% else %}
                     {% for project in category.projects %}
                     <li class="text-gray-700">{{ project.title }}</li>
                     {% endfor %}
+                    {% endif %}
                 </ul>
             </li>
             {% endfor %}
+            {% endif %}
         </ul>
     </div>
 
