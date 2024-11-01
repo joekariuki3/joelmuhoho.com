@@ -1,6 +1,5 @@
 from flask import Blueprint, render_template
-from app.models.project import Project
-from app.models.category import Category
+from app.models import Category
 from sqlalchemy.exc import OperationalError
 
 public = Blueprint('public', __name__)
@@ -13,10 +12,9 @@ def home() -> 'flask.Response':
     """
     try:
         # Get the categories
-        full_stack_category: Category = Category.get_by_id(1)
-        front_end_category: Category = Category.get_by_id(2)
-        email_category: Category = Category.get_by_id(3)
-
+        full_stack_category: Category = Category.get_by_like_name('Full Stack')
+        front_end_category: Category = Category.get_by_like_name('Front End')
+        email_category: Category = Category.get_by_like_name('email')
         # Render the template
         return render_template('index.html',
                                full_stack_category=full_stack_category,
