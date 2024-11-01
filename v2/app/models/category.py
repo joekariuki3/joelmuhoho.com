@@ -29,3 +29,19 @@ class Category(BaseModel):
             return cls.query.filter_by(name=name).first()
         except Exception as e:
             return None
+
+    # get gategory that have a name like name
+    @classmethod
+    def get_by_like_name(cls, name: str) -> Optional['Category']:
+        """
+        Retrieve a category record from the database by its name.
+
+        :param name: The name of the category to retrieve.
+        :type name: str
+        :return: The Category object with the specified name or None if an error occurs.
+        :rtype: Category or None
+        """
+        try:
+            return cls.query.filter(cls.name.like(f'%{name}%')).first()
+        except Exception as e:
+            return None
