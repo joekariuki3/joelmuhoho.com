@@ -1,6 +1,7 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
+from flask_login import LoginManager
 from config import DevelopmentConfig, ProductionConfig
 import os
 
@@ -19,12 +20,28 @@ def create_app():
     # Initialize the database
     db.init_app(app)
     migrate = Migrate(app, db)
+    from app.models import User, Project, Category
+    with app.app_context():
+        db.create_all()
+
 
     # Register Blueprints
     from app.routes.public import public
     from app.routes.admin import admin
+    from app.routes.auth import auth
     app.register_blueprint(public)
-    app.register_blueprint(admin, url_prefix='/admin')  # Prefix all admin routes
+    app.register_blueprint(admin, url_prefix='/admin')
+    app.register_blueprint(auth, url_prefix='/auth')
 
+
+    # Initialize Flask-Login
+    login_manager = LoginManager()
+    login_manager.init_app(app)
+    login_manager.login_view = 'auth.login'  # Redirect to login page if not authenticated
+    login_manager.login_message_category = 'warning'  # Flash message category for unauthenticated access
+
+    @login_manager.user_loader
+    def load_user(user_id):
+        return User.get_by_id(user_id)  # Assumes `get_by_id` method exists in the User model
 
     return app
