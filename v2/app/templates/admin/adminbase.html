@@ -69,11 +69,11 @@
         <!-- Flash Messages -->
         {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
-        <div class="mb-4">
+        <div class="max-w-md mx-auto">
             {% for category, message in messages %}
             <div
                 class="flash {{ category }} relative p-4 mb-2 border-l-4
-                    {% if category == 'success' %} border-green-500 bg-green-100 text-green-800 {% elif category == 'error' %} border-red-500 bg-red-100 text-red-800 {% elif category == 'warning' %} border-yellow-500 bg-yellow-100 text-yellow-800 {% else %} border-gray-500 bg-gray-100 text-gray-800 {% endif %}">
+                    {% if category == 'success' %} border-green-500 bg-green-100 text-green-800 {% elif category == 'danger' %} border-red-500 bg-red-100 text-red-800 {% elif category == 'info' %} border-yellow-500 bg-yellow-100 text-yellow-800 {% else %} border-yello-500 bg-yellow-100 yellow-gray-800 {% endif %}">
 
                 {{ message }}
 
