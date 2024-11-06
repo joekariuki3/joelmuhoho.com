@@ -18,11 +18,10 @@ def admin_dashboard() -> 'flask.Response':
     if not categories:
         categories = []
         flash('No categories found. Please add some categories first.', 'warning')
-    projects_count = Project.get_by_user(current_user.id)
-    if not projects_count:
-        projects_count = 0
+    projects_count = len(Project.get_by_user(current_user.id) or [])
+    if projects_count == 0:
         flash('No projects found. Please add some projects first.', 'warning')
-    return render_template('admin/dashboard.html', categories=categories, projects_count=len(projects_count))
+    return render_template('admin/dashboard.html', categories=categories, projects_count=projects_count)
 
 @admin.route('/add_project', methods=['GET', 'POST'])
 @login_required
