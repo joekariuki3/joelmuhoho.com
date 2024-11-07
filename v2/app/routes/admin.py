@@ -3,6 +3,8 @@ from flask import Blueprint, render_template, redirect, url_for, request, flash
 from app.models import Project, Category, User
 from typing import List
 from flask_login import login_required, current_user
+from app.forms import ProjectForm, CategoryForm
+from app.utils import ProjectConstants, CategoryConstants
 
 admin = Blueprint('admin', __name__)
 
@@ -30,9 +32,11 @@ def add_project() -> 'flask.Response':
     Add a new project to the database.
     :return: A redirect to the manage projects page or a rendered template of the add project page.
     """
-    if request.method == 'POST':
+    form: ProjectForm = ProjectForm()
+    form.category_id.choices = [(category.id, category.name) for category in Category.get_all() or []]
+    title: str = ProjectConstants.TITLE.get('ADD')
+    if request.method == 'POST' and form.validate_on_submit():
         data: dict = request.form.to_dict()
-        print(data)
         new_project: Project = Project(
             title=data.get('title'),
             description=data.get('description'),
@@ -46,11 +50,10 @@ def add_project() -> 'flask.Response':
         if status != 200:
             flash(message, 'danger')
             return redirect(url_for('admin.add_project'))
-        flash(message, 'success')
-        return redirect(url_for('admin.manage_projects'))
-
-    categories: List[Category] = Category.get_all()
-    return render_template('admin/add_project.html', categories=categories)
+        else:
+            flash(message, 'success')
+            return redirect(url_for('admin.manage_projects'))
+    return render_template('admin/add_project.html', form=form, title=title)
 
 @admin.route('/categories/add', methods=['GET', 'POST'])
 @login_required
@@ -59,6 +62,8 @@ def add_category() -> 'flask.Response':
     Add a new category to the database.
     :return: A redirect to the manage categories page or a rendered template of the add category page.
     """
+    form: CategoryForm = CategoryForm()
+    title: str = CategoryConstants.TITLE.get('ADD')
     if request.method == 'POST':
         name: str = request.form.get('name')
         new_category = Category(name=name)
@@ -67,7 +72,7 @@ def add_category() -> 'flask.Response':
             flash(message, 'success')
             return redirect(url_for('admin.manage_categories'))
         flash(message, 'danger')
-    return render_template('admin/add_category.html')
+    return render_template('admin/add_category.html', form=form, title=title)
 
 @admin.route('/manage_categories')
 @login_required
@@ -90,14 +95,24 @@ def edit_category(category_id: str) -> 'flask.Response':
     if not category:
         category = []
         flash('Category not found.', 'danger')
+    form: CategoryForm = CategoryForm()
+    title: str = CategoryConstants.TITLE.get('EDIT')
+    form.name.data = category.name
     if request.method == 'POST':
-        data: dict = request.form.to_dict()
-        message, status = category.update(data)
-        if status == 200:
-            flash(message, 'success')
-            return redirect(url_for('admin.manage_categories'))
-        flash(message, 'danger')
-    return render_template('admin/edit_category.html', category=category)
+        if form.validate_on_submit():
+            data: dict = request.form.to_dict()
+            message, status = category.update(data)
+            if status == 200:
+                flash(message, 'success')
+                return redirect(url_for('admin.manage_categories'))
+            flash(message, 'danger')
+        else:
+             # Print or log the form errors
+            for field, errors in form.errors.items():
+                for error in errors:
+                    print(f"Error in {getattr(form, field).label.text}: {error}")
+            flash('correct the errors below and try again.', 'danger')
+    return render_template('admin/edit_category.html', form=form, title=title, category_id=category.id)
 
 @admin.route('/delete_category/<category_id>', methods=['POST'])
 @login_required
@@ -136,20 +151,38 @@ def edit_project(project_id: str) -> 'flask.Response':
     :param project_id: The ID of the project to edit.
     :return: A redirect to the manage projects page or a rendered template of the edit project page.
     """
-    categories: List[Category] = Category.get_all()
+    form: ProjectForm = ProjectForm()
+    title: str = ProjectConstants.TITLE.get('EDIT')
+
     project: Project = Project.get_by_id(project_id)
+    categories: List[Category] = Category.get_all()
+    if not project:
+        flash('Project not found.', 'danger')
+        return redirect(url_for('admin.manage_projects'))
+
     if not categories:
         categories = []
         flash('No categories found. Please add some categories first.', 'warning')
         return redirect(url_for('admin.manage_projects'))
+
+    form.title.data = project.title
+    form.description.data = project.description
+    form.category_id.data = project.category_id
+    form.category_id.choices = [(category.id, category.name) for category in categories]
+    form.image_url.data = project.image_url
+    form.demo_url.data = project.demo_url
+    form.github_url.data = project.github_url
     if request.method == 'POST':
-        data: dict = request.form.to_dict()
-        message, status = project.update(data)
-        if status == 200:
-            flash(message, 'success')
-            return redirect(url_for('admin.manage_projects'))
-        flash(message, 'danger')
-    return render_template('admin/edit_project.html', project=project, categories=categories)
+        if form.validate_on_submit():
+            data: dict = request.form.to_dict()
+            message, status = project.update(data)
+            if status == 200:
+                flash(message, 'success')
+                return redirect(url_for('admin.manage_projects'))
+            flash(message, 'danger')
+        else:
+            flash('Please correct the errors below and try again.', 'danger')
+    return render_template('admin/edit_project.html', project_id=project_id, form=form, title=title)
 
 @admin.route('/delete_project/<project_id>', methods=['POST'])
 @login_required
