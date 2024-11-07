@@ -1,53 +1,95 @@
 {% extends 'admin/adminbase.html' %}
 
-{% block title %}Add Project{% endblock %}
+{% block title %}{{title}}{% endblock %}
 
 {% block content %}
-<h2 class="text-2xl font-bold mb-6">Add New Project</h2>
-<form method="POST" class="bg-white p-6 rounded-lg shadow-md space-y-4 max-w-lg mx-auto">
-    <div>
-        <label for="title" class="block text-gray-700 font-semibold mb-2">Title:</label>
-        <input type="text" name="title" id="title" required
-            class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+<section class="bg-white">
+    <div class="max-w-2xl px-4 py-8 mx-auto lg:py-16">
+        <h2 class="mb-4 text-xl font-bold text-gray-900 text-center">{{title}}</h2>
+        <form method="POST">
+            {{form.csrf_token}}
+            <div class="grid gap-4 mb-4 sm:grid-cols-2 sm:gap-6 sm:mb-5">
+                <div class="sm:col-span-2">
+                    {{form.title.label (for="title", class="block mb-2 text-sm font-medium text-gray-900")}}
+                    {{form.title (class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
+                    focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5",)}}
+                    {% if form.title.errors %}
+                    <ul class="text-red-500">
+                        {% for error in form.title.errors %}
+                        <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                </div>
+                <div class="sm:col-span-2">
+                    {{form.description.label (for="description", class="block mb-2 text-sm font-medium text-gray-900")}}
+                    {{form.description (class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
+                    focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5",)}}
+                    {% if form.title.errors %}
+                    <ul class="text-red-500">
+                        {% for error in form.title.errors %}
+                        <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                </div>
+                <div>
+                    {{form.category_id.label (for="category_id", class="block mb-2 text-sm font-medium text-gray-900")}}
+                    {{form.category_id(class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
+                    focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5",)}}
+                    {% if form.title.errors %}
+                    <ul class="text-red-500">
+                        {% for error in form.title.errors %}
+                        <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                </div>
+                <div>
+                    {{form.image_url.label (for="image_url", class="block mb-2 text-sm font-medium text-gray-900")}}
+                    {{form.image_url (class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
+                    focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5",)}}
+                    {% if form.title.errors %}
+                    <ul class="text-red-500">
+                        {% for error in form.title.errors %}
+                        <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                </div>
+                <div>
+                    {{form.demo_url.label (for="demo_url", class="block mb-2 text-sm font-medium text-gray-900")}}
+                    {{form.demo_url (class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
+                    focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5",)}}
+                    {% if form.title.errors %}
+                    <ul class="text-red-500">
+                        {% for error in form.title.errors %}
+                        <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                </div>
+                <div>
+                    {{form.github_url.label (for="github_url", class="block mb-2 text-sm font-medium text-gray-900")}}
+                    {{form.github_url (class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
+                    focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5",)}}
+                    {% if form.title.errors %}
+                    <ul class="text-red-500">
+                        {% for error in form.title.errors %}
+                        <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="flex items-center justify-between space-x-4">
+                <a href="{{ url_for('admin.manage_projects') }}" class="text-red-600 hover:text-red-800 font-medium">
+                    Cancel
+                </a>
+                {{form.submit (class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none
+                focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center", value=title)}}
+            </div>
+        </form>
     </div>
-
-    <div>
-        <label for="description" class="block text-gray-700 font-semibold mb-2">Description:</label>
-        <textarea name="description" id="description" required
-            class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
-    </div>
-
-    <div>
-        <label for="category_id" class="block text-gray-700 font-semibold mb-2">Category:</label>
-        <select name="category_id" id="category_id" required
-            class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
-            {% for category in categories %}
-            <option value="{{ category.id }}">{{ category.name }}</option>
-            {% endfor %}
-        </select>
-    </div>
-
-    <div>
-        <label for="image_url" class="block text-gray-700 font-semibold mb-2">Image URL:</label>
-        <input type="text" name="image_url" id="image_url"
-            class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
-    </div>
-
-    <div>
-        <label for="demo_url" class="block text-gray-700 font-semibold mb-2">Demo URL:</label>
-        <input type="text" name="demo_url" id="demo_url"
-            class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
-    </div>
-
-    <div>
-        <label for="github_url" class="block text-gray-700 font-semibold mb-2">GitHub URL:</label>
-        <input type="text" name="github_url" id="github_url"
-            class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
-    </div>
-
-    <button type="submit"
-        class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
-        Add Project
-    </button>
-</form>
+</section>
 {% endblock %}

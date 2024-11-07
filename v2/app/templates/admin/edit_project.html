@@ -1,58 +1,93 @@
 {% extends 'admin/adminbase.html' %}
 
-{% block title %}Edit Project{% endblock %}
+{% block title %}{{title}}{% endblock %}
 
 {% block content %}
 <section class="bg-white">
     <div class="max-w-2xl px-4 py-8 mx-auto lg:py-16">
-        <h2 class="mb-4 text-xl font-bold text-gray-900">Edit Project</h2>
-        <form action="{{ url_for('admin.edit_project', project_id=project.id) }}" method="POST">
+        <h2 class="mb-4 text-xl font-bold text-gray-900 text-center">{{title}}</h2>
+        <form action="{{ url_for('admin.edit_project', project_id=project_id) }}" method="POST">
+            {{form.csrf_token}}
             <div class="grid gap-4 mb-4 sm:grid-cols-2 sm:gap-6 sm:mb-5">
                 <div class="sm:col-span-2">
-                    <label for="title" class="block mb-2 text-sm font-medium text-gray-900">Title:</label>
-                    <input type="text" name="title" id="title" value="{{ project.title }}" required
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5">
+                    {{form.title.label (for="title", class="block mb-2 text-sm font-medium text-gray-900")}}
+                    {{form.title (class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
+                    focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5",)}}
+                    {% if form.title.errors %}
+                    <ul class="text-red-500">
+                        {% for error in form.title.errors %}
+                        <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
                 </div>
                 <div class="sm:col-span-2">
-                    <label for="description" class="block mb-2 text-sm font-medium text-gray-900">Description:</label>
-                    <textarea name="description" id="description" rows="4" required
-                        class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-600 focus:border-blue-600">{{ project.description }}</textarea>
-                </div>
-                <div>
-                    <label for="category_id" class="block mb-2 text-sm font-medium text-gray-900">Category:</label>
-                    <select name="category_id" id="category_id" required
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5">
-                        {% for category in categories %}
-                        <option value="{{ category.id }}" {% if category.id==project.category_id %}selected{% endif %}>
-                            {{ category.name }}
-                        </option>
+                    {{form.description.label (for="description", class="block mb-2 text-sm font-medium text-gray-900")}}
+                    {{form.description (class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
+                    focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5",)}}
+                    {% if form.title.errors %}
+                    <ul class="text-red-500">
+                        {% for error in form.title.errors %}
+                        <li>{{ error }}</li>
                         {% endfor %}
-                    </select>
+                    </ul>
+                    {% endif %}
                 </div>
                 <div>
-                    <label for="image_url" class="block mb-2 text-sm font-medium text-gray-900">Image URL:</label>
-                    <input type="text" name="image_url" id="image_url" value="{{ project.image_url }}"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5">
+                    {{form.category_id.label (for="category_id", class="block mb-2 text-sm font-medium text-gray-900")}}
+                    {{form.category_id(class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
+                    focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5",)}}
+                    {% if form.title.errors %}
+                    <ul class="text-red-500">
+                        {% for error in form.title.errors %}
+                        <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
                 </div>
                 <div>
-                    <label for="demo_url" class="block mb-2 text-sm font-medium text-gray-900">Demo URL:</label>
-                    <input type="text" name="demo_url" id="demo_url" value="{{ project.demo_url }}"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5">
+                    {{form.image_url.label (for="image_url", class="block mb-2 text-sm font-medium text-gray-900")}}
+                    {{form.image_url (class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
+                    focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5",)}}
+                    {% if form.title.errors %}
+                    <ul class="text-red-500">
+                        {% for error in form.title.errors %}
+                        <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
                 </div>
                 <div>
-                    <label for="github_url" class="block mb-2 text-sm font-medium text-gray-900">GitHub URL:</label>
-                    <input type="text" name="github_url" id="github_url" value="{{ project.github_url }}"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5">
+                    {{form.demo_url.label (for="demo_url", class="block mb-2 text-sm font-medium text-gray-900")}}
+                    {{form.demo_url (class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
+                    focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5",)}}
+                    {% if form.title.errors %}
+                    <ul class="text-red-500">
+                        {% for error in form.title.errors %}
+                        <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                </div>
+                <div>
+                    {{form.github_url.label (for="github_url", class="block mb-2 text-sm font-medium text-gray-900")}}
+                    {{form.github_url (class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
+                    focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5",)}}
+                    {% if form.title.errors %}
+                    <ul class="text-red-500">
+                        {% for error in form.title.errors %}
+                        <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
                 </div>
             </div>
-            <div class="flex items-center space-x-4">
-                <button type="submit"
-                    class="text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
-                    Save Changes
-                </button>
+            <div class="flex items-center justify-between space-x-4">
                 <a href="{{ url_for('admin.manage_projects') }}" class="text-red-600 hover:text-red-800 font-medium">
                     Cancel
                 </a>
+                {{form.submit (class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none
+                focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center", value=title)}}
             </div>
         </form>
     </div>
