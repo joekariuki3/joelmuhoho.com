@@ -14,6 +14,9 @@ class NameConstants:
     FIRST_NAME_REQUIRED_MESSAGE = "Please enter your first name."
     LAST_NAME_REQUIRED_MESSAGE = "Please enter your last name."
 
+    USERNAME_REQUIRED_MESSAGE = "Please enter your username."
+    USERNAME_PLACEHOLDER = "Username"
+
 class ProjectConstants:
     TITLE = {"ADD": "Add Project", "EDIT": "Edit Project"}
     PROJECT_NAME_REQUIRED_MESSAGE = "Project Name/Title is required."
@@ -33,6 +36,20 @@ class ProjectConstants:
 
 class CategoryConstants:
     TITLE = {"ADD": "Add Category", "EDIT": "Edit Category"}
-
     CATEGORY_NAME_REQUIRED_MESSAGE = "Category name is required."
     CATEGORY_NAME_PLACEHOLDER = "Category Name"
+
+class RoleConstants:
+    ROOT = "root"
+    DEFAULT = "default"
+    ADMIN = "admin"
+    USER = "user"
+    ROLES = [ADMIN, USER]
+
+    TITLE = {"ADD": "Add Role", "EDIT": "Edit Role"}
+    ROLE_REQUIRED_MESSAGE = "Role name is required."
+    ROLE_PLACEHOLDER = "Role Name"
+    ROOT_USER_REQUIRED_MESSAGE = "ROOT user details not provided in .env file, ROOT_FIRST_NAME, ROOT_LAST_NAME, ROOT_EMAIL, ROOT_PASSWORD are required"
+
+class RegistrationConstants:
+    TITLE = {"ADD": "Add User", "EDIT": "Edit User"}
