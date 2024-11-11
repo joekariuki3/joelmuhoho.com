@@ -1,6 +1,7 @@
 from .basemodel import BaseModel, db
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
+from app.utils import RoleConstants
 
 
 class User(BaseModel, UserMixin):
@@ -8,22 +9,30 @@ class User(BaseModel, UserMixin):
 
     first_name = db.Column(db.String(80), nullable=False)
     last_name = db.Column(db.String(80), nullable=False)
-    username = db.Column(db.String(80), unique=True, nullable=False)
+    username = db.Column(db.String(80), nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(255), nullable=False)
     active = db.Column(db.Boolean, default=True)
 
+    # Foreign keys
+    role_id = db.Column(db.String, db.ForeignKey('roles.id'), nullable=False)
+
     # Relationships
     projects = db.relationship('Project', backref='users', lazy=True)
+    role = db.relationship('Role', backref='users', lazy=True)
 
-    def __init__(self, first_name, last_name, email, password):
+    def __init__(self, first_name, last_name, email, role_id, password):
         super().__init__()
         self.first_name = first_name
         self.last_name = last_name
         self.username = self.set_username(first_name, last_name)
         self.email = email
+        self.role_id = role_id
         self.password = generate_password_hash(password)
         self.active = True
+
+    def __str__(self):
+        return f'{self.first_name} {self.last_name} {self.email}'
 
     def set_username(self, first_name: str, last_name: str) -> str:
         """
@@ -57,3 +66,12 @@ class User(BaseModel, UserMixin):
         :rtype: str
         """
         return self.id
+    def is_root(self):
+        """
+        Check if the user is a root user.
+
+        :return: True if the user is a root user, False otherwise.
+        :rtype: bool
+        """
+        print(f"{self.role.name}:{RoleConstants.ROOT}")
+        return self.role.name == RoleConstants.ROOT
