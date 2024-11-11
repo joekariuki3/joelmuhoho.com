@@ -10,6 +10,12 @@ class Config:
     SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL', 'sqlite:///portfolio.db')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
+    # root user info
+    ROOT_FIRST_NAME=os.getenv('ROOT_FIRST_NAME')
+    ROOT_LAST_NAME=os.getenv('ROOT_LAST_NAME')
+    ROOT_EMAIL=os.getenv('ROOT_EMAIL')
+    ROOT_PASSWORD=os.getenv('ROOT_PASSWORD')
+
 class DevelopmentConfig(Config):
     DEBUG = True
     SERVER_HOST = '0.0.0.0'
