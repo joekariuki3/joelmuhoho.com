@@ -8,11 +8,40 @@
         <h5 class="mb-3 text-base font-semibold text-gray-900 md:text-xl">
             Users
             <span
-                class="inline-flex items-center justify-center px-2 py-0.5 ms-3 text-xs font-medium text-gray-500 bg-gray-200 rounded">
-                0
+                class="inline-flex items-center justify-center px-2 py-0.5 ms-3 text-xs font-medium text-gray-500 bg-gray-200 rounded">{{users_count}}
+                {% if users_count == 1 %}user{% else %}users{% endif%}
             </span>
         </h5>
         <p class="text-sm font-normal text-gray-500">All users</p>
+        <ul class="my-4 space-y-3">
+            {% if not users %}
+            <li class="text-gray-700">No users found</li>
+            {% else %}
+            {% for user in users %}
+            <li>
+                <a onclick="toggleProjects('{{ user.id }}')"
+                    class="flex items-center p-3 text-base font-bold text-gray-900 rounded-lg bg-gray-50 hover:bg-gray-100 group hover:shadow">
+                    <span class="flex-1 ms-3 whitespace-nowrap">{{user.username}}</span>
+                    <span
+                        class="inline-flex items-center justify-center px-2 py-0.5 ms-3 text-xs font-medium text-gray-500 bg-gray-200 rounded">{{user.role.name}}</span>
+                    <span
+                        class="inline-flex items-center justify-center px-2 py-0.5 ms-3 text-xs font-medium text-gray-500 bg-gray-200 rounded">{{user.projects
+                        | length}}
+                        {% if user.projects| length == 1 %}project{% else %}projects{% endif%}</span>
+                </a>
+                <ul id="projects-list-{{ user.id }}" class="mt-3 pl-6 hidden">
+                    {% if not user.projects %}
+                    <li class="text-gray-700">No projects</li>
+                    {% else %}
+                    {% for project in user.projects %}
+                    <li class="text-gray-700">{{ project.title }}</li>
+                    {% endfor %}
+                    {% endif %}
+                </ul>
+            </li>
+            {% endfor %}
+            {% endif %}
+        </ul>
     </div>
 
     <div class="w-full max-w-sm p-4 m-2 bg-white border border-gray-200 rounded-lg shadow sm:p-6">
