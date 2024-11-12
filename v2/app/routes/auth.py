@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, redirect, url_for, flash, request
-from flask_login import login_user, logout_user, login_required
-from app.models import User
+from flask_login import login_user, logout_user, login_required, current_user
+from app.models import User, Role
 from app.forms import LoginForm, RegisterForm
 
 auth = Blueprint('auth', __name__)
@@ -32,19 +32,31 @@ def logout():
     return redirect(url_for('auth.login'))
 
 @auth.route('/register', methods=['GET', 'POST'])
+@login_required
 def register():
     form = RegisterForm()
+    roles = Role.get_all() or []
+    if not roles:
+        flash('No roles found. Please add some roles first.', 'warning')
+    form.role_id.choices = [(role.id, role.name) for role in roles]
     if request.method == 'POST':
+        if not current_user.is_root():
+            flash('You are not authorized to register new users. contact your administrator', 'danger')
+            return redirect(url_for('auth.register'))
         if form.validate_on_submit():
-            first_name = request.form.get('first_name')
-            last_name = request.form.get('last_name')
-            email = request.form.get('email')
-            password = request.form.get('password')
-            user = User( first_name=first_name, last_name=last_name, email=email, password=password)
+            data = form.data
+
+            user = User(
+                first_name=data.get('first_name'),
+                last_name=data.get('last_name'),
+                email=data.get('email'),
+                password=data.get('password'),
+                role_id=data.get('role_id')
+            )
             message, status = user.save()
             if status == 200:
                 flash(message, 'success')
-                return redirect(url_for('auth.login'))
+                return redirect(url_for('admin.manage_users'))
             flash(message, 'danger')
         else:
             flash('Please correct the errors below and try again.', 'danger')
