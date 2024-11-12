@@ -14,7 +14,7 @@
     <header class="bg-white text-gray-700 py-4">
         <div class="container mx-auto px-4 md:px-6 lg:px-8 flex justify-between items-center">
             <a href="{{ url_for('admin.admin_dashboard') }}">
-                <h1 class="text-xl md:text-2xl font-bold">Admin Dashboard</h1>
+                <h1 class="text-xl md:text-2xl font-bold">{{current_user.role}} Dashboard</h1>
             </a>
 
             <!-- Hamburger Button for Mobile -->
@@ -32,18 +32,24 @@
                 <ul
                     class="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-6 text-sm md:text-base py-4 md:py-0 px-4 md:px-0">
                     {% if current_user.is_authenticated %}
+                    {% if current_user.is_root() %}
                     <li>
-                        <a href="{{ url_for('admin.admin_dashboard') }}" class="hover:text-black">Dashboard</a>
+                        <a href="{{ url_for('admin.manage_users') }}" class="hover:text-black">Users</a>
+                    </li>
+                    {% endif %}
+                    <li>
+                        <a href="{{ url_for('admin.manage_categories') }}" class="hover:text-black">Categories</a>
                     </li>
                     <li>
-                        <a href="{{ url_for('admin.manage_projects') }}" class="hover:text-black">Manage Projects</a>
+                        <a href="{{ url_for('admin.manage_projects') }}" class="hover:text-black">Projects</a>
                     </li>
                     <li>
-                        <a href="{{ url_for('admin.manage_categories') }}" class="hover:text-black">Manage
-                            Categories</a>
+                        <a href="{{ url_for('admin.manage_roles') }}" class="hover:text-black">Roles</a>
                     </li>
                     <li>
-                        {{current_user.username}}
+                        <a href="#" class="hover:text-black">
+                            {{current_user.username}}</a>
+
                     </li>
                     <li>
                         <a href="{{ url_for('auth.logout') }}" class="hover:text-black">
@@ -53,10 +59,6 @@
                     <li>
                         <a href="{{ url_for('auth.login') }}" class="hover:text-black">
                             Login</a>
-                    </li>
-                    <li>
-                        <a href="{{ url_for('auth.register') }}" class="hover:text-black">
-                            Register</a>
                     </li>
                     {% endif %}
                 </ul>
