@@ -1,0 +1,83 @@
+{% extends 'admin/adminbase.html' %}
+
+{% block title %}{{title}}{% endblock %}
+
+{% block content %}
+<section class="bg-white">
+    <div class="max-w-2xl px-4 py-8 mx-auto lg:py-16">
+        <h2 class="mb-4 text-xl font-bold text-gray-900 text-center">{{title}}</h2>
+        <form action="{{ url_for('admin.edit_user', user_id=user_id) }}" method="POST">
+            {{form.csrf_token}}
+            <div class="grid gap-4 mb-4 sm:grid-cols-2 sm:gap-6 sm:mb-5">
+                <div>
+                    {{form.first_name.label (for="first_name", class="block mb-2 text-sm font-medium text-gray-900")}}
+                    {{form.first_name (class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
+                    focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5",)}}
+                    {% if form.first_name.errors %}
+                    <ul class="text-red-500">
+                        {% for error in form.first_name.errors %}
+                        <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                </div>
+                <div>
+                    {{form.last_name.label (for="last_name", class="block mb-2 text-sm font-medium text-gray-900")}}
+                    {{form.last_name (class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
+                    focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5",)}}
+                    {% if form.last_name.errors %}
+                    <ul class="text-red-500">
+                        {% for error in form.last_name.errors %}
+                        <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                </div>
+                <div>
+                    {{form.username.label (for="username", class="block mb-2 text-sm font-medium text-gray-900")}}
+                    {{form.username(class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
+                    focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5",)}}
+                    {% if form.username.errors %}
+                    <ul class="text-red-500">
+                        {% for error in form.username.errors %}
+                        <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                </div>
+                <div>
+                    {{form.email.label (for="email", class="block mb-2 text-sm font-medium text-gray-900")}}
+                    {{form.email (class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
+                    focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5",)}}
+                    {% if form.email.errors %}
+                    <ul class="text-red-500">
+                        {% for error in form.email.errors %}
+                        <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                </div>
+                <div>
+                    {{form.role_id.label (for="role_id", class="block mb-2 text-sm font-medium text-gray-900")}}
+                    {{form.role_id (class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
+                    focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5",)}}
+                    {% if form.role_id.errors %}
+                    <ul class="text-red-500">
+                        {% for error in form.role_id.errors %}
+                        <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="flex items-center justify-between space-x-4">
+                <a href="{{ url_for('admin.manage_users') }}" class="text-red-600 hover:text-red-800 font-medium">
+                    Cancel
+                </a>
+                {{form.submit (class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none
+                focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center", value=title)}}
+            </div>
+        </form>
+    </div>
+</section>
+{% endblock %}
