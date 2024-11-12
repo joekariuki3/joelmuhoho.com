@@ -1,10 +1,10 @@
 # app/admin.py
 from flask import Blueprint, render_template, redirect, url_for, request, flash
-from app.models import Project, Category, User
+from app.models import Project, Category, User, Role
 from typing import List
 from flask_login import login_required, current_user
-from app.forms import ProjectForm, CategoryForm
-from app.utils import ProjectConstants, CategoryConstants
+from app.forms import ProjectForm, CategoryForm, RoleForm, RegisterForm
+from app.utils import ProjectConstants, CategoryConstants, RoleConstants, RegistrationConstants
 
 admin = Blueprint('admin', __name__)
 
@@ -23,7 +23,9 @@ def admin_dashboard() -> 'flask.Response':
     projects_count = len(Project.get_by_user(current_user.id) or [])
     if projects_count == 0:
         flash('No projects found. Please add some projects first.', 'warning')
-    return render_template('admin/dashboard.html', categories=categories, projects_count=projects_count)
+    users = User.get_all() or []
+    users_count = len(users)
+    return render_template('admin/dashboard.html', categories=categories, projects_count=projects_count, users_count=users_count, users=users)
 
 @admin.route('/add_project', methods=['GET', 'POST'])
 @login_required
@@ -199,3 +201,101 @@ def delete_project(project_id: str) -> 'flask.Response':
     else:
         flash(message, 'danger')
     return redirect(url_for('admin.manage_projects'))
+
+@admin.route('/manage_roles')
+@login_required
+def manage_roles() -> 'flask.Response':
+    if current_user.is_root():
+        roles = Role.get_all() or []
+    # If the user is not a root user, only show the roles that the user has access to
+    else:
+        roles = [current_user.role] or []
+    if not roles:
+        flash('No roles found. Please add some roles first.', 'warning')
+    return render_template('admin/manage_roles.html', roles=roles)
+
+@admin.route('/add_role', methods=['GET', 'POST'])
+@login_required
+def add_role() -> 'flask.Response':
+    title = RoleConstants.TITLE.get('ADD')
+    form = RoleForm()
+    roles_from_db = Role.get_all() or []
+    if request.method == 'POST':
+        name = request.form.get('name')
+        if name in [role.name for role in roles_from_db]:
+            flash('Role already exists.', 'danger')
+            return redirect(url_for('admin.add_role'))
+        new_role = Role(name=name)
+        message, status = new_role.save()
+        if status == 200:
+            flash(message, 'success')
+            return redirect(url_for('admin.manage_roles'))
+        flash(message, 'danger')
+    return render_template('admin/add_role.html', form=form, title=title)
+
+@admin.route('/delete_role/<role_id>', methods=['POST'])
+@login_required
+def delete_role(role_id: str) -> 'flask.Response':
+    role: Role = Role.get_by_id(role_id)
+    message, status = role.delete()
+    if status == 200:
+        flash(message, 'success')
+    else:
+        flash(message, 'danger')
+    return redirect(url_for('admin.manage_roles'))
+
+@admin.route('/manage_users')
+@login_required
+def manage_users() -> 'flask.Response':
+    if current_user.is_root():
+        users = User.get_all() or []
+    else:
+        users = [current_user]
+    if not users:
+        flash('No users found. Please add some users first.', 'warning')
+    return render_template('admin/manage_users.html', users=users)
+
+@admin.route('/edit_user/<user_id>', methods=['GET', 'POST'])
+@login_required
+def edit_user(user_id: str) -> 'flask.Response':
+    form = RegisterForm(edit_mode=True)
+    title = RegistrationConstants.TITLE.get('EDIT')
+    roles = Role.get_all() or []
+    if not roles:
+        flash('No roles found. Please add some roles first.', 'warning')
+    user = User.query.filter_by(id=user_id).first()
+    if not user:
+        flash('User not found.', 'danger')
+        return redirect(url_for('admin.manage_users'))
+
+    if user.role.name != RoleConstants.DEFAULT:
+        form.role_id.data = str(user.role_id)
+
+    form.first_name.data = user.first_name
+    form.last_name.data = user.last_name
+    form.username.data = user.username
+    form.email.data = user.email
+    form.role_id.choices = [(role.id, role.name) for role in roles]
+    if request.method == 'POST':
+        if form.validate_on_submit():
+            data = request.form.to_dict()
+            message, status = user.update(data)
+            if status == 200:
+                flash(message, 'success')
+                return redirect(url_for('admin.manage_users'))
+            flash(message, 'danger')
+        else:
+            print(form.errors)
+            flash(f'Please correct the errors below and try again.{form.errors}', 'danger')
+    return render_template('admin/edit_user.html', user_id=user.id, form=form, title=title)
+
+@admin.route('/delete_user/<user_id>', methods=['POST'])
+@login_required
+def delete_user(user_id: str) -> 'flask.Response':
+    user: User = User.get_by_id(user_id)
+    message, status = user.delete()
+    if status == 200:
+        flash(message, 'success')
+    else:
+        flash(message, 'danger')
+    return redirect(url_for('admin.manage_users'))
