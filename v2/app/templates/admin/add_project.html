@@ -25,9 +25,9 @@
                     {{form.description.label (for="description", class="block mb-2 text-sm font-medium text-gray-900")}}
                     {{form.description (class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
                     focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5",)}}
-                    {% if form.title.errors %}
+                    {% if form.description.errors %}
                     <ul class="text-red-500">
-                        {% for error in form.title.errors %}
+                        {% for error in form.description.errors %}
                         <li>{{ error }}</li>
                         {% endfor %}
                     </ul>
@@ -37,9 +37,9 @@
                     {{form.category_id.label (for="category_id", class="block mb-2 text-sm font-medium text-gray-900")}}
                     {{form.category_id(class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
                     focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5",)}}
-                    {% if form.title.errors %}
+                    {% if form.category_id.errors %}
                     <ul class="text-red-500">
-                        {% for error in form.title.errors %}
+                        {% for error in form.category_id.errors %}
                         <li>{{ error }}</li>
                         {% endfor %}
                     </ul>
@@ -49,9 +49,9 @@
                     {{form.image_url.label (for="image_url", class="block mb-2 text-sm font-medium text-gray-900")}}
                     {{form.image_url (class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
                     focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5",)}}
-                    {% if form.title.errors %}
+                    {% if form.image_url.errors %}
                     <ul class="text-red-500">
-                        {% for error in form.title.errors %}
+                        {% for error in form.image_url.errors %}
                         <li>{{ error }}</li>
                         {% endfor %}
                     </ul>
@@ -61,9 +61,9 @@
                     {{form.demo_url.label (for="demo_url", class="block mb-2 text-sm font-medium text-gray-900")}}
                     {{form.demo_url (class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
                     focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5",)}}
-                    {% if form.title.errors %}
+                    {% if form.demo_url.errors %}
                     <ul class="text-red-500">
-                        {% for error in form.title.errors %}
+                        {% for error in form.demo_url.errors %}
                         <li>{{ error }}</li>
                         {% endfor %}
                     </ul>
@@ -73,9 +73,9 @@
                     {{form.github_url.label (for="github_url", class="block mb-2 text-sm font-medium text-gray-900")}}
                     {{form.github_url (class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
                     focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5",)}}
-                    {% if form.title.errors %}
+                    {% if form.github_url.errors %}
                     <ul class="text-red-500">
-                        {% for error in form.title.errors %}
+                        {% for error in form.github_url.errors %}
                         <li>{{ error }}</li>
                         {% endfor %}
                     </ul>
