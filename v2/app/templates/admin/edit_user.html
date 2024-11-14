@@ -69,6 +69,37 @@
                     </ul>
                     {% endif %}
                 </div>
+                <div>
+                    {{form.profession.label (for="profession", class="block mb-2 text-sm font-medium text-gray-900")}}
+                    {{form.profession (class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
+                    focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5",)}}
+                </div>
+                <div>
+                    {{form.bio.label (for="profession", class="block mb-2 text-sm font-medium text-gray-900")}}
+                    {{form.bio (class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
+                    focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5",)}}
+                </div>
+                <div>
+                    {{form.github_url.label (for="profession", class="block mb-2 text-sm font-medium text-gray-900")}}
+                    {{form.github_url (class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
+                    focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5",)}}
+                </div>
+                <div>
+                    {{form.linkedin_url.label (for="profession", class="block mb-2 text-sm font-medium text-gray-900")}}
+                    {{form.linkedin_url (class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
+                    focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5",)}}
+                </div>
+                <div>
+                    {{form.twitter_url.label (for="profession", class="block mb-2 text-sm font-medium text-gray-900")}}
+                    {{form.twitter_url (class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
+                    focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5",)}}
+                </div>
+                <div>
+                    {{form.profile_image_url.label (for="profession", class="block mb-2 text-sm font-medium
+                    text-gray-900")}}
+                    {{form.profile_image_url (class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
+                    focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5",)}}
+                </div>
             </div>
             <div class="flex items-center justify-between space-x-4">
                 <a href="{{ url_for('admin.manage_users') }}" class="text-red-600 hover:text-red-800 font-medium">

@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, redirect, url_for, flash, request
 from flask_login import login_user, logout_user, login_required, current_user
 from app.models import User, Role
 from app.forms import LoginForm, RegisterForm
-from app.utils import RegistrationConstants
+from app.utils import RegistrationConstants, RoleConstants
 
 auth = Blueprint('auth', __name__)
 
@@ -47,14 +47,24 @@ def register():
             return redirect(url_for('auth.register'))
         if form.validate_on_submit():
             data = form.data
-
             user = User(
                 first_name=data.get('first_name'),
                 last_name=data.get('last_name'),
                 email=data.get('email'),
                 password=data.get('password'),
-                role_id=data.get('role_id')
+                role_id=data.get('role_id'),
+                profession=data.get('profession'),
+                bio=data.get('bio'),
+                github_url=data.get('github_url'),
+                linkedin_url=data.get('linkedin_url'),
+                twitter_url=data.get('twitter_url'),
+                profile_image_url=data.get('profile_image_url')
             )
+            # only one root user can be registered
+            user_role_name = Role.get_by_id(user.role_id).name
+            if user_role_name == RoleConstants.ROOT:
+                flash('Only one root user is allowed. Choose another role.', 'danger')
+                return redirect(url_for('auth.register'))
             message, status = user.save()
             if status == 200:
                 flash(message, 'success')
