@@ -2,6 +2,7 @@ from .basemodel import BaseModel, db
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
 from app.utils import RoleConstants
+from config import Config
 
 
 class User(BaseModel, UserMixin):
@@ -13,6 +14,12 @@ class User(BaseModel, UserMixin):
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(255), nullable=False)
     active = db.Column(db.Boolean, default=True)
+    profession = db.Column(db.String(100))
+    bio = db.Column(db.Text)
+    github_url = db.Column(db.String(200))
+    linkedin_url = db.Column(db.String(200))
+    twitter_url = db.Column(db.String(200))
+    profile_image_url = db.Column(db.String(200))
 
     # Foreign keys
     role_id = db.Column(db.String, db.ForeignKey('roles.id'), nullable=False)
@@ -21,7 +28,7 @@ class User(BaseModel, UserMixin):
     projects = db.relationship('Project', backref='users', lazy=True)
     role = db.relationship('Role', backref='users', lazy=True)
 
-    def __init__(self, first_name, last_name, email, role_id, password):
+    def __init__(self, first_name, last_name, email, role_id, password, profession=None, bio=None, github_url=None, linkedin_url=None, twitter_url=None, profile_image_url=None):
         super().__init__()
         self.first_name = first_name
         self.last_name = last_name
@@ -30,6 +37,12 @@ class User(BaseModel, UserMixin):
         self.role_id = role_id
         self.password = generate_password_hash(password)
         self.active = True
+        self.profession = profession
+        self.bio = bio
+        self.github_url = github_url
+        self.linkedin_url = linkedin_url
+        self.twitter_url = twitter_url
+        self.profile_image_url = profile_image_url if profile_image_url else Config.DEFAULT_PROFILE_IMAGE_URL
 
     def __str__(self):
         return f'{self.first_name} {self.last_name} {self.email}'

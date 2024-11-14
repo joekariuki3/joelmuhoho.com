@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, SelectField
+from wtforms import StringField, PasswordField, SubmitField, SelectField, TextAreaField
 from wtforms.validators import DataRequired, Email, Length, EqualTo, Optional
-from app.utils import PasswordConstants, EmailConstants, NameConstants, RoleConstants
+from app.utils import PasswordConstants, EmailConstants, NameConstants, RoleConstants, RegistrationConstants
 
 class RegisterForm(FlaskForm):
     """Register form"""
@@ -39,6 +39,12 @@ class RegisterForm(FlaskForm):
                                          DataRequired(message=PasswordConstants.CONFIRM_PASSWORD_REQUIRED_MESSAGE)
                                          ],
                                      render_kw={'placeholder': "••••••••"})
+    profession = StringField('Your Profession', render_kw={'placeholder': RegistrationConstants.PROFESSION_PLACEHOLDER})
+    bio = TextAreaField('Your Bio', render_kw={'placeholder': RegistrationConstants.BIO_PLACEHOLDER})
+    github_url = StringField('GitHub URL', render_kw={'placeholder': RegistrationConstants.GITHUB_URL_PLACEHOLDER})
+    linkedin_url = StringField('LinkedIn URL', render_kw={'placeholder': RegistrationConstants.LINKEDIN_URL_PLACEHOLDER})
+    twitter_url = StringField('Twitter URL', render_kw={'placeholder': RegistrationConstants.TWITTER_URL_PLACEHOLDER})
+    profile_image_url = StringField('Profile Image URL', render_kw={'placeholder': RegistrationConstants.PROFILE_IMAGE_URL_PLACEHOLDER})
     submit = SubmitField('Create an account')
 
     def __init__(self, edit_mode=False, *args, **kwargs):

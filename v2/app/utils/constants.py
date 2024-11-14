@@ -53,3 +53,9 @@ class RoleConstants:
 
 class RegistrationConstants:
     TITLE = {"ADD": "Add User", "EDIT": "Edit User"}
+    PROFESSION_PLACEHOLDER = "Profession"
+    BIO_PLACEHOLDER = "Bio"
+    GITHUB_URL_PLACEHOLDER = "GitHub URL"
+    LINKEDIN_URL_PLACEHOLDER = "LinkedIn URL"
+    TWITTER_URL_PLACEHOLDER = "Twitter URL"
+    PROFILE_IMAGE_URL_PLACEHOLDER = "Profile Image URL"
