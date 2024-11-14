@@ -1,93 +1,97 @@
 {% extends 'admin/adminbase.html' %}
 
+{% block title %}{{title}}{% endblock %}
+
 {% block content %}
-<section>
-    <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
-        <div class="w-full bg-white rounded-lg shadow md:mt-0 sm:max-w-md xl:p-0">
-            <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
-                <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl text-center">
-                    Create an account
-                </h1>
-                <form class="space-y-4 md:space-y-6" method="POST" action="{{ url_for('auth.register') }}">
-                    {{ form.csrf_token }}
-                    <div>
-                        {{ form.first_name.label(class="block mb-2 text-sm font-medium text-gray-900") }}
-                        {{ form.first_name(class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
-                        focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5") }}
-                        {% if form.first_name.errors %}
-                        <ul class="text-red-500">
-                            {% for error in form.first_name.errors %}
-                            <li>{{ error }}</li>
-                            {% endfor %}
-                        </ul>
-                        {% endif %}
-                    </div>
-                    <div>
-                        {{ form.last_name.label(class="block mb-2 text-sm font-medium text-gray-900") }}
-                        {{ form.last_name(class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
-                        focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5") }}
-                        {% if form.last_name.errors %}
-                        <ul class="text-red-500">
-                            {% for error in form.last_name.errors %}
-                            <li>{{ error }}</li>
-                            {% endfor %}
-                        </ul>
-                        {% endif %}
-                    </div>
-                    <div>
-                        {{ form.email.label(class="block mb-2 text-sm font-medium text-gray-900") }}
-                        {{ form.email(class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
-                        focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5") }}
-                        {% if form.email.errors %}
-                        <ul class="text-red-500">
-                            {% for error in form.email.errors %}
-                            <li>{{ error }}</li>
-                            {% endfor %}
-                        </ul>
-                        {% endif %}
-                    </div>
-                    <div>
-                        {{ form.role_id.label(class="block mb-2 text-sm font-medium text-gray-900") }}
-                        {{ form.role_id(class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
-                        focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5") }}
-                        {% if form.role_id.errors %}
-                        <ul class="text-red-500">
-                            {% for error in form.role_id.errors %}
-                            <li>{{ error }}</li>
-                            {% endfor %}
-                        </ul>
-                        {% endif %}
-                    </div>
-                    <div>
-                        {{ form.password.label(class="block mb-2 text-sm font-medium text-gray-900") }}
-                        {{ form.password(class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
-                        focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5") }}
-                        {% if form.password.errors %}
-                        <ul class="text-red-500">
-                            {% for error in form.password.errors %}
-                            <li>{{ error }}</li>
-                            {% endfor %}
-                        </ul>
-                        {% endif %}
-                    </div>
-                    <div>
-                        {{ form.confirm_password.label(class="block mb-2 text-sm font-medium text-gray-900") }}
-                        {{ form.confirm_password(class="bg-gray-50 border border-gray-300 text-gray-900 text-sm
-                        rounded-lg
-                        focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5") }}
-                        {% if form.confirm_password.errors %}
-                        <ul class="text-red-500">
-                            {% for error in form.confirm_password.errors %}
-                            <li>{{ error }}</li>
-                            {% endfor %}
-                        </ul>
-                        {% endif %}
-                    </div>
-                    {{form.submit(class="w-full text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none
-                    focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center")}}
-                </form>
+<section class="bg-white">
+    <div class="max-w-2xl px-4 py-8 mx-auto lg:py-16">
+        <h2 class="mb-4 text-xl font-bold text-gray-900 text-center">{{title}}</h2>
+        <form action="{{ url_for('auth.register') }}" method="POST">
+            {{form.csrf_token}}
+            <div class="grid gap-4 mb-4 sm:grid-cols-2 sm:gap-6 sm:mb-5">
+                <div>
+                    {{form.first_name.label (for="first_name", class="block mb-2 text-sm font-medium text-gray-900")}}
+                    {{form.first_name (class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
+                    focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5",)}}
+                    {% if form.first_name.errors %}
+                    <ul class="text-red-500">
+                        {% for error in form.first_name.errors %}
+                        <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                </div>
+                <div>
+                    {{form.last_name.label (for="last_name", class="block mb-2 text-sm font-medium text-gray-900")}}
+                    {{form.last_name (class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
+                    focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5",)}}
+                    {% if form.last_name.errors %}
+                    <ul class="text-red-500">
+                        {% for error in form.last_name.errors %}
+                        <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                </div>
+                <div>
+                    {{form.email.label (for="email", class="block mb-2 text-sm font-medium text-gray-900")}}
+                    {{form.email (class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
+                    focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5",)}}
+                    {% if form.email.errors %}
+                    <ul class="text-red-500">
+                        {% for error in form.email.errors %}
+                        <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                </div>
+                <div>
+                    {{form.role_id.label (for="role_id", class="block mb-2 text-sm font-medium text-gray-900")}}
+                    {{form.role_id (class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
+                    focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5",)}}
+                    {% if form.role_id.errors %}
+                    <ul class="text-red-500">
+                        {% for error in form.role_id.errors %}
+                        <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                </div>
+                <div>
+                    {{form.password.label (for="password", class="block mb-2 text-sm font-medium text-gray-900")}}
+                    {{form.password (class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
+                    focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5",)}}
+                    {% if form.password.errors %}
+                    <ul class="text-red-500">
+                        {% for error in form.password.errors %}
+                        <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                </div>
+                <div>
+                    {{form.confirm_password.label (for="confirm_password", class="block mb-2 text-sm font-medium
+                    text-gray-900")}}
+                    {{form.confirm_password (class="bg-gray-50 border border-gray-300 text-gray-900 text-sm
+                    rounded-lg
+                    focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5",)}}
+                    {% if form.confirm_password.errors %}
+                    <ul class="text-red-500">
+                        {% for error in form.confirm_password.errors %}
+                        <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                </div>
             </div>
-        </div>
+            <div class="flex items-center justify-between space-x-4">
+                <a href="{{ url_for('admin.manage_users') }}" class="text-red-600 hover:text-red-800 font-medium">
+                    Cancel
+                </a>
+                {{form.submit (class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none
+                focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center", value=title)}}
+            </div>
+        </form>
     </div>
 </section>
 {% endblock %}
