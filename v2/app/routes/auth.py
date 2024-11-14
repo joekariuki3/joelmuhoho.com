@@ -2,6 +2,7 @@ from flask import Blueprint, render_template, redirect, url_for, flash, request
 from flask_login import login_user, logout_user, login_required, current_user
 from app.models import User, Role
 from app.forms import LoginForm, RegisterForm
+from app.utils import RegistrationConstants
 
 auth = Blueprint('auth', __name__)
 
@@ -34,6 +35,7 @@ def logout():
 @auth.route('/register', methods=['GET', 'POST'])
 @login_required
 def register():
+    title = RegistrationConstants.TITLE.get('ADD')
     form = RegisterForm()
     roles = Role.get_all() or []
     if not roles:
@@ -60,4 +62,4 @@ def register():
             flash(message, 'danger')
         else:
             flash('Please correct the errors below and try again.', 'danger')
-    return render_template('auth/register.html', form=form)
+    return render_template('auth/register.html', form=form, title=title)
