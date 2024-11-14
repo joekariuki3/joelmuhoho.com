@@ -16,6 +16,8 @@ class Config:
     ROOT_EMAIL=os.getenv('ROOT_EMAIL')
     ROOT_PASSWORD=os.getenv('ROOT_PASSWORD')
 
+    DEFAULT_PROFILE_IMAGE_URL=os.getenv('DEFAULT_PROFILE_IMAGE_URL')
+
 class DevelopmentConfig(Config):
     DEBUG = True
     SERVER_HOST = '0.0.0.0'
