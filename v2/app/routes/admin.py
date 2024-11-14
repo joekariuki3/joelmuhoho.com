@@ -237,6 +237,9 @@ def add_role() -> 'flask.Response':
 @login_required
 def delete_role(role_id: str) -> 'flask.Response':
     role: Role = Role.get_by_id(role_id)
+    if role.name == RoleConstants.ROOT or role.name == RoleConstants.DEFAULT:
+        flash('Cannot delete root or default role.', 'danger')
+        return redirect(url_for('admin.manage_roles'))
     message, status = role.delete()
     if status == 200:
         flash(message, 'success')
@@ -275,6 +278,12 @@ def edit_user(user_id: str) -> 'flask.Response':
     form.last_name.data = user.last_name
     form.username.data = user.username
     form.email.data = user.email
+    form.profession.data = user.profession
+    form.bio.data = user.bio
+    form.github_url.data = user.github_url
+    form.linkedin_url.data = user.linkedin_url
+    form.twitter_url.data = user.twitter_url
+    form.profile_image_url.data = user.profile_image_url
     form.role_id.choices = [(role.id, role.name) for role in roles]
     if request.method == 'POST':
         if form.validate_on_submit():
@@ -293,6 +302,9 @@ def edit_user(user_id: str) -> 'flask.Response':
 @login_required
 def delete_user(user_id: str) -> 'flask.Response':
     user: User = User.get_by_id(user_id)
+    if user.role.name == RoleConstants.ROOT:
+        flash('Cannot delete user with root role.', 'danger')
+        return redirect(url_for('admin.manage_users'))
     message, status = user.delete()
     if status == 200:
         flash(message, 'success')
