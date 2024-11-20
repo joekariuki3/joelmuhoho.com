@@ -44,9 +44,6 @@ class User(BaseModel, UserMixin):
         self.twitter_url = twitter_url
         self.profile_image_url = profile_image_url if profile_image_url else Config.DEFAULT_PROFILE_IMAGE_URL
 
-    def __str__(self):
-        return f'{self.first_name} {self.last_name} {self.email}'
-
     def set_username(self, first_name: str, last_name: str) -> str:
         """
         Set the username for the user.
@@ -88,3 +85,15 @@ class User(BaseModel, UserMixin):
         """
         print(f"{self.role.name}:{RoleConstants.ROOT}")
         return self.role.name == RoleConstants.ROOT
+
+    @classmethod
+    def get_by_email(cls, email):
+        """
+        Retrieve a user record from the database by their email.
+
+        :param email: The email of the user to retrieve.
+        :type email: str
+        :return: The User object with the specified email or None if not found.
+        :rtype: User or None
+        """
+        return cls.query.filter_by(email=email).first()
