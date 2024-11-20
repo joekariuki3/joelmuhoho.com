@@ -35,6 +35,11 @@ class ProjectConstants:
     PROJECT_GITHUB_URL_PLACEHOLDER = "Project GitHub URL"
 
 class CategoryConstants:
+    FULL_STACK = "Full Stack"
+    BACK_END = "Back End"
+    FRONT_END = "Front End"
+    EMAIL = "Email"
+    ALL = [FULL_STACK, BACK_END, FRONT_END, EMAIL]
     TITLE = {"ADD": "Add Category", "EDIT": "Edit Category"}
     CATEGORY_NAME_REQUIRED_MESSAGE = "Category name is required."
     CATEGORY_NAME_PLACEHOLDER = "Category Name"
