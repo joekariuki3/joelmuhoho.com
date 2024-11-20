@@ -2,6 +2,8 @@ from flask import Blueprint, render_template
 from app.models import Category, User
 from sqlalchemy.exc import OperationalError
 from config import Config
+from app.utils import CategoryConstants
+from typing import List
 
 public = Blueprint('public', __name__)
 
@@ -12,16 +14,12 @@ def home() -> 'flask.Response':
     Returns a rendered template of the home page.
     """
     try:
-        # Get the categories
-        full_stack_category: Category = Category.get_by_like_name('Full Stack')
-        front_end_category: Category = Category.get_by_like_name('Front End')
-        email_category: Category = Category.get_by_like_name('email')
+        # get all categories
+        categories: List[Category] = Category.get_all()
         root_user = User.get_by_email(Config.ROOT_EMAIL)
         # Render the template
         return render_template('public/index.html',
-                               full_stack_category=full_stack_category,
-                               front_end_category=front_end_category,
-                               email_category=email_category,
+                               categories=categories,
                                user=root_user)
     except OperationalError as e:
         # If there is an operational error, call the custom error handler
