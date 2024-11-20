@@ -64,8 +64,10 @@ def add_category() -> 'flask.Response':
     Add a new category to the database.
     :return: A redirect to the manage categories page or a rendered template of the add category page.
     """
-    form: CategoryForm = CategoryForm()
     title: str = CategoryConstants.TITLE.get('ADD')
+    form: CategoryForm = CategoryForm()
+    categories_from_db = Category.get_all()
+    form.name.choices = [(category, category) for category in CategoryConstants.ALL if category not in [category.name for category in categories_from_db]]
     if request.method == 'POST':
         name: str = request.form.get('name')
         new_category = Category(name=name)
