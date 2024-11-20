@@ -1,0 +1,17 @@
+{% extends 'public/base.html'%}
+
+{% block main_content%}
+<!-- main content start -->
+<main class="mb-12 w-full md:overflow-y-auto">
+    <div class="container mx-auto px-5 max-w-3xl">
+
+        <!-- blog block here -->
+        {% include 'public/blog.html' %}
+
+        <!-- project block here -->
+        {% include 'public/project.html' %}
+
+    </div>
+</main>
+<!-- main content end -->
+{% endblock %}
