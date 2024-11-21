@@ -18,6 +18,42 @@ class BaseModel(db.Model):
     def __str__(self):
         return super().__str__()
 
+
+    def customMessage(self, action: str, error=None) -> str:
+        # Common success or failure message template
+        """
+        Return a string with a custom message describing the success or failure of an action.
+
+        :param action: The action that was attempted (e.g. 'save', 'update', 'delete', etc.).
+        :type action: str
+        :param error: An error message if the action failed, or None if it was successful.
+        :type error: str or None
+        :return: A string describing the outcome of the action.
+        :rtype: str
+        """
+        status = f"Failed: {error}" if error else "was successful"
+
+        # Mapping of actions to user-friendly past tense verbs
+        action_map = {
+            'save': 'Creation',
+            'update': 'Update',
+            'soft delete': 'Soft Delete',
+            'restore': 'Restoration',
+            'delete': 'Deletion',
+        }
+        verb = action_map.get(action, action)
+
+        # Use getattr to safely access attributes and fall back to 'id' if none are available
+        identifier = (
+            getattr(self, 'name', None) or
+            getattr(self, 'title', None) or
+            f"{getattr(self, 'first_name', '')} {getattr(self, 'last_name', '')}".strip() or
+            getattr(self, 'id', 'Unknown')
+        )
+        return f"{self.__class__.__name__} {identifier} {verb} {status}."
+
+
+
     def save(self) -> Tuple[str, int]:
         """
         Save the model to the database.
@@ -28,11 +64,11 @@ class BaseModel(db.Model):
         try:
             db.session.add(self)
             db.session.commit()
-            message: str = f'{self.__class__.__name__} {self.id} saved successfully.'
+            message: str =  self.customMessage( 'save')
             return message, 200
         except Exception as e:
             db.session.rollback()
-            message: str = f'Failed to save {self.__class__.__name__} {self.id}: {str(e)}'
+            message: str = self.customMessage('save',error=e)
             return message, 500
 
     def update(self, data) -> Tuple[str, int]:
@@ -46,11 +82,11 @@ class BaseModel(db.Model):
             for key, value in data.items():
                 setattr(self, key, value)
             db.session.commit()
-            message = f'{self.__class__.__name__} {self.id} updated successfully.'
+            message: str =  self.customMessage( 'update')
             return message, 200
         except Exception as e:
             db.session.rollback()
-            message = f'Failed to update {self.__class__.__name__} {self.id}: {str(e)}'
+            message: str = self.customMessage('update',error=e)
             return message, 500
     def soft_delete(self) -> Tuple[str, int]:
         """
@@ -62,11 +98,11 @@ class BaseModel(db.Model):
         try:
             self.deleted_at = datetime.now()
             db.session.commit()
-            message = f'{self.__class__.__name__} {self.id} soft deleted successfully.'
+            message: str =  self.customMessage( 'soft delete')
             return message, 200
         except Exception as e:
             db.session.rollback()
-            message = f'Failed to soft delete {self.__class__.__name__} {self.id}: {str(e)}'
+            message: str = self.customMessage('soft delete',error=e)
             return message, 500
 
     def delete(self) -> Tuple[str, int]:
@@ -79,11 +115,12 @@ class BaseModel(db.Model):
         try:
             db.session.delete(self)
             db.session.commit()
-            message = f'{self.__class__.__name__} {self.id} deleted successfully.'
+            message: str =  self.customMessage( 'delete')
+
             return message, 200
         except Exception as e:
             db.session.rollback()
-            message = f'Failed to delete {self.__class__.__name__} {self.id}: {str(e)}'
+            message: str = self.customMessage('delete',error=e)
             return message, 500
 
     def restore(self) -> Tuple[str, int]:
@@ -97,11 +134,12 @@ class BaseModel(db.Model):
             self.deleted_at = None
             self.restored_at = datetime.now()
             db.session.commit()
-            message = f'{self.__class__.__name__} {self.id} restored successfully.'
+            message: str =  self.customMessage( 'restore')
+
             return message, 200
         except Exception as e:
             db.session.rollback()
-            message = f'Failed to restore {self.__class__.__name__} {self.id}: {str(e)}'
+            message: str = self.customMessage('restore',error=e)
             return message, 500
 
     @classmethod
