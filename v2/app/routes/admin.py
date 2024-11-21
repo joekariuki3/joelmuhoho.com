@@ -111,10 +111,6 @@ def edit_category(category_id: str) -> 'flask.Response':
                 return redirect(url_for('admin.manage_categories'))
             flash(message, 'danger')
         else:
-             # Print or log the form errors
-            for field, errors in form.errors.items():
-                for error in errors:
-                    print(f"Error in {getattr(form, field).label.text}: {error}")
             flash('correct the errors below and try again.', 'danger')
     return render_template('admin/edit_category.html', form=form, title=title, category_id=category.id)
 
@@ -296,7 +292,6 @@ def edit_user(user_id: str) -> 'flask.Response':
                 return redirect(url_for('admin.manage_users'))
             flash(message, 'danger')
         else:
-            print(form.errors)
             flash(f'Please correct the errors below and try again.{form.errors}', 'danger')
     return render_template('admin/edit_user.html', user_id=user.id, form=form, title=title)
 

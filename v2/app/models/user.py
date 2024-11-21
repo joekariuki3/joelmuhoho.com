@@ -83,7 +83,6 @@ class User(BaseModel, UserMixin):
         :return: True if the user is a root user, False otherwise.
         :rtype: bool
         """
-        print(f"{self.role.name}:{RoleConstants.ROOT}")
         return self.role.name == RoleConstants.ROOT
 
     @classmethod
