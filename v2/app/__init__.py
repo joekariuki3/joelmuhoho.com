@@ -7,6 +7,7 @@ import os
 
 db = SQLAlchemy()
 
+
 def create_app():
     app = Flask(__name__)
 
@@ -24,7 +25,6 @@ def create_app():
     with app.app_context():
         db.create_all()
 
-
     # Register Blueprints
     from app.routes.public import public
     from app.routes.admin import admin
@@ -33,15 +33,16 @@ def create_app():
     app.register_blueprint(admin, url_prefix='/admin')
     app.register_blueprint(auth, url_prefix='/auth')
 
-
     # Initialize Flask-Login
     login_manager = LoginManager()
     login_manager.init_app(app)
-    login_manager.login_view = 'auth.login'  # Redirect to login page if not authenticated
-    login_manager.login_message_category = 'warning'  # Flash message category for unauthenticated access
+    # Redirect to login page if not authenticated
+    login_manager.login_view = 'auth.login'
+    # Flash message category for unauthenticated access
+    login_manager.login_message_category = 'warning'
 
     @login_manager.user_loader
     def load_user(user_id):
-        return User.get_by_id(user_id)  # Assumes `get_by_id` method exists in the User model
+        return User.get_by_id(user_id)
 
     return app
